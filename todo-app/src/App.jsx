@@ -1,11 +1,11 @@
 import React from 'react'
-import Navigation from './components/Navigation'
+import TodoWrapper from './components/TodoWrapper'
 
 function App() {
 
   return (
     <>
-      <Navigation />      
+      <TodoWrapper />
     </>
   )
 }
