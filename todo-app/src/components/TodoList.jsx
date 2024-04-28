@@ -4,7 +4,7 @@ import { useState } from "react"
 export default function TodoList( {todos, setTodos} ) {
     const [editingItemId, setEditingItemId] = useState(null)
 
-    function editTask(id) {
+    function editTodo(id) {
         setTodos(todos.map(todo => todo.id === id ? (
             {...todo, isEditing: true}
         ) : todo
@@ -12,22 +12,23 @@ export default function TodoList( {todos, setTodos} ) {
         setEditingItemId(id)
     }
 
-    // function updateDescription(id, description) {
+    // function editDescription(id, newDescription) {
     //     setTodos(todos.map(todo => todo.id === id ? (
-    //         {...todo, description: description}
+    //         {...todo, description: newDescription} ATTEMPTED FIX NOT WORKING
     //     ) : todo
     //     ));
-    // } WORK ON THIS
+    //     setEditingItemId(null)
+    // }
 
     return (
         <div className="grid grid-cols-4 gap-4">
             {todos.map((todo, index) => (
                 <TodoItem 
                 key={index} 
-                task={todo}
-                editTask={editTask}
+                todo={todo}
+                editTodo={editTodo}
+                // editDescription={editDescription} ATTEMPTED FIX NOT WORKING
                 editingItemId={editingItemId}
-                // updateDescription={updateDescription} WORK ON THIS
                 />
             ))}
         </div>
