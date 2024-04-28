@@ -12,7 +12,12 @@ export default function TodoList( {todos, setTodos} ) {
         setEditingItemId(id)
     }
 
-    
+    // function updateDescription(id, description) {
+    //     setTodos(todos.map(todo => todo.id === id ? (
+    //         {...todo, description: description}
+    //     ) : todo
+    //     ));
+    // } WORK ON THIS
 
     return (
         <div className="grid grid-cols-4 gap-4">
@@ -22,6 +27,7 @@ export default function TodoList( {todos, setTodos} ) {
                 task={todo}
                 editTask={editTask}
                 editingItemId={editingItemId}
+                // updateDescription={updateDescription} WORK ON THIS
                 />
             ))}
         </div>

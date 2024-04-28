@@ -1,7 +1,9 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
-export default function TodoItem({ task, editTask, editingItemId }) {
+export default function TodoItem({ task, editTask, editingItemId, updateDescription }) {
     const dialogRef = useRef(null);
+    // const [description, setDescription] = useState(''); work on this
+
     useEffect(() => {
         if (task.isEditing && task.id === editingItemId) {
             displayDialog();
@@ -15,9 +17,9 @@ export default function TodoItem({ task, editTask, editingItemId }) {
 
     function closeDialog(id) {
         if (task.id === id) {
-            const updatedTask = {...task, isEditing: false};
+            const updatedTask = {...task, isEditing: false,};
             editTask(updatedTask);
-        } 
+        }
 
         const dialog = dialogRef.current;
         if (dialog) {
@@ -25,11 +27,25 @@ export default function TodoItem({ task, editTask, editingItemId }) {
         }
     }
 
+    // const handleInput = (e) => {
+    //     setDescription(e.target.value); WORK ON THIS
+    // }
+
+
     return (
         <>
             <div className="col-span-4">
-                <h2>{task.task}</h2>
-                {task.description ? <p>{task.description}</p> : (
+                <h2 className="uppercase">{task.task}</h2>
+                {task.description ? (
+                <>
+                <p>{task.description}</p>
+                <button
+                    onClick={() => editTask(task.id)}
+                    className="bg-slate-600 hover:bg-slate-900 text-white font-bold px-2 py-1 m-1 rounded-2xl">
+                    Edit
+                </button>
+                </>
+            ) : (
                     <button
                         onClick={() => editTask(task.id)}
                         className="bg-slate-600 hover:bg-slate-900 text-white font-bold px-2 py-1 m-1 rounded-2xl">
@@ -42,10 +58,20 @@ export default function TodoItem({ task, editTask, editingItemId }) {
                 ref={dialogRef}
                 className="flex flex-col p-12 rounded-lg bg-slate-900 text-white">
                     <h2 className="uppercase">{task.task}</h2>
-                    <textarea cols="60" rows="14" className="bg-slate-900 border border-white" />
-                    <form method="dialog">
-                        <button onClick={() => closeDialog(task.id)}>Close</button>
-                    </form>
+                    <textarea 
+                    // value={description}
+                    // onChange={handleInput} WORK ON THIS
+                    cols="60" 
+                    rows="14" 
+                    className="bg-slate-900 border border-white rounded-lg p-2 text-white"
+                    />
+                    <div className="flex gap-24 m-auto">
+                        <button>Woopsie</button>
+                        <button onClick={() => {
+                            // updateDescription(task.id, description); WORK ON THIS
+                            closeDialog(task.id);
+                            }}>Save & Close</button>
+                    </div>
                 </dialog>
             )}
         </>
