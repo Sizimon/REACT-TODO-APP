@@ -14,6 +14,7 @@ export default function Navigation({ createTodo }) {
         <nav className="flex flex-col justify-center items-center bg-gray-800 p-4 w-auto">
             <div>
                 <input 
+                required
                 type="text"
                 onChange={e => setTodo(e.target.value)}
                 value={todo}
