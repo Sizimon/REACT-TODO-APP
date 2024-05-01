@@ -29,21 +29,21 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
 
     return (
         <>
-            <div className="col-span-2 flex flex-col justify-center items-center border border-spacing-2 m-4 p-4">
-                <h2 className="uppercase">{todo.task}</h2>
+            <div className="col-span-4 md:col-span-2 flex flex-col justify-center items-center border border-slate-400 border-spacing-2 m-4 p-4 gap-6 transition ease-in-out delay-50 hover:shadow-xl duration-500">
+                <h2 className="uppercase font-teko font-medium text-4xl">{todo.task}</h2>
                 {todo.description ? (
                 <>
-                <p>{todo.description}</p>
+                <p className="border border-spacing-2 text-center p-4 rounded-md">{todo.description}</p>
                 <button
                     onClick={() => editTodo(todo.id)}
-                    className="bg-slate-600 hover:bg-slate-900 text-white font-bold px-2 py-1 m-1 rounded-2xl">
+                    className="bg-slate-600 uppercase hover:bg-slate-900 text-white font-bold px-2 py-1 m-1 rounded-2xl">
                     Edit
                 </button>
                 </>
             ) : (
                     <button
                         onClick={() => editTodo(todo.id)}
-                        className="bg-slate-600 hover:bg-slate-900 text-white font-bold px-2 py-1 m-1 rounded-2xl">
+                        className="bg-slate-600 uppercase hover:bg-slate-900 text-white font-bold px-2 py-1 m-1 rounded-2xl">
                         Describe your task
                     </button>
                 )}
