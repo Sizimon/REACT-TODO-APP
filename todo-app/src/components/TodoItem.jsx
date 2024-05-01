@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 
-export default function TodoItem({ todo, editTodo, editingItemId }) {
+export default function TodoItem({ todo, editTodo, editingItemId, editDescription }) {
     const dialogRef = useRef(null);
-    // const [description, setDescription] = useState(''); ATTEMPTED FIX NOT WORKING
+    const [description, setDescription] = useState(todo.description);
 
     useEffect(() => {
         if (todo.isEditing && todo.id === editingItemId) {
@@ -27,13 +27,9 @@ export default function TodoItem({ todo, editTodo, editingItemId }) {
         }
     }
 
-    // function handleDescription() {
-    //     editDescription(todo.id, description);
-    // } ATTEMPTED FIX NOT WORKING
-
     return (
         <>
-            <div className="col-span-4">
+            <div className="col-span-2 flex flex-col justify-center items-center border border-spacing-2 m-4 p-4">
                 <h2 className="uppercase">{todo.task}</h2>
                 {todo.description ? (
                 <>
@@ -58,8 +54,8 @@ export default function TodoItem({ todo, editTodo, editingItemId }) {
                 className="flex flex-col p-12 rounded-lg bg-slate-900 text-white">
                     <h2 className="uppercase">{todo.task}</h2>
                     <textarea
-                    // value={description} ATTEMPTED FIX NOT WORKING
-                    // onChange={e => setDescription(e.target.value)} ATTEMPTED FIX NOT WORKING
+                    value={description}
+                    onChange={e => setDescription(e.target.value)} 
                     cols="60" 
                     rows="14" 
                     className="bg-slate-900 border border-white rounded-lg p-2 text-white"
@@ -67,8 +63,8 @@ export default function TodoItem({ todo, editTodo, editingItemId }) {
                     <div className="flex gap-24 m-auto">
                         <button>Woopsie</button>
                         <button onClick={() => {
-                            // handleDescription(); ATTEMPTED FIX NOT WORKING
                             closeDialog(todo.id);
+                            editDescription(todo.id, description);
                             }}>Save & Close</button>
                     </div>
                 </dialog>

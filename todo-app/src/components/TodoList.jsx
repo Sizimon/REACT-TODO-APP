@@ -12,13 +12,12 @@ export default function TodoList( {todos, setTodos} ) {
         setEditingItemId(id)
     }
 
-    // function editDescription(id, newDescription) {
-    //     setTodos(todos.map(todo => todo.id === id ? (
-    //         {...todo, description: newDescription} ATTEMPTED FIX NOT WORKING
-    //     ) : todo
-    //     ));
-    //     setEditingItemId(null)
-    // }
+    function editDescription(id, newDescription) {
+        setTodos(todos.map(todo => todo.id === id ? (
+            {...todo, description: newDescription}
+        ) : todo
+        ));
+    }
 
     return (
         <div className="grid grid-cols-4 gap-4">
@@ -27,8 +26,8 @@ export default function TodoList( {todos, setTodos} ) {
                 key={index} 
                 todo={todo}
                 editTodo={editTodo}
-                // editDescription={editDescription} ATTEMPTED FIX NOT WORKING
                 editingItemId={editingItemId}
+                editDescription={editDescription}
                 />
             ))}
         </div>
