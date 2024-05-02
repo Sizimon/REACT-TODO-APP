@@ -19,7 +19,11 @@ export default function DropdownCatagories() {
                 )}
             </button>
             {isOpen && <div className='flex flex-col bg-slate-400 border-black text-white absolute top-12 rounded-lg overflow-hidden w-full'>
-                <span className='p-2 hover:bg-slate-600'>HTML</span>
+                <span 
+                className='p-2 hover:bg-slate-600'
+                >
+                    HTML
+                </span>
                 <span className='p-2 hover:bg-slate-600'>CSS</span>
                 <span className='p-2 hover:bg-slate-600'>Javascript</span>
                 <span className='p-2 hover:bg-slate-600'>React</span>
