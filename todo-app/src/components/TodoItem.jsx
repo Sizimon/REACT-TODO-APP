@@ -33,7 +33,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                 <h2 className="uppercase font-teko font-medium text-4xl">{todo.task}</h2>
                 {todo.description ? (
                 <>
-                <p className="border border-spacing-2 text-center p-4 rounded-md">{todo.description}</p>
+                <p className="border border-spacing-2 text-center p-4 rounded-md whitespace-pre-wrap">{todo.description}</p>
                 <button
                     onClick={() => editTodo(todo.id)}
                     className="bg-slate-600 uppercase hover:bg-slate-900 text-white font-bold px-2 py-1 m-1 rounded-2xl">
