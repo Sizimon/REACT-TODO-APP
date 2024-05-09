@@ -5,7 +5,9 @@ import "react-color-palette/css";
 export default function TodoItem({ todo, editTodo, editingItemId, editDescription }) {
     const dialogRef = useRef(null);
     const [description, setDescription] = useState(todo.description);
-    const [color, setColor] = useColor("hex", "#00FF00");
+    const [color, setColor] = useColor("#ffffff");
+    const [categoryName, setCategoryName] = useState('');
+    const [categories, setCategories] = useState([]);
 
     useEffect(() => {
         if (todo.isEditing && todo.id === editingItemId) {
@@ -30,6 +32,11 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
         }
     }
 
+    const submitCategory = (categoryName, color) => {
+        setCategories(prevCategories => [...prevCategories, { name: categoryName, color: color }]);
+        setCategoryName('');
+    }
+
     return (
         <>
             <div className="col-span-4 md:col-span-2 flex flex-col justify-center items-center border border-slate-400 border-spacing-2 m-4 p-4 gap-6 transition ease-in-out delay-50 hover:shadow-xl duration-500">
@@ -37,6 +44,13 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                 {todo.description ? (
                     <>
                         <p className="border border-spacing-2 text-center p-4 rounded-md whitespace-pre-wrap">{todo.description}</p>
+                        <ul className="flex flex-row list-none p-12 border border-white rounded-lg gap-2">
+                            {categories.map((category, index) => (
+                                <li key={index} style={{backgroundColor: category.color}} className="rounded-lg p-1 border border-white">
+                                    {category.name}
+                                </li>
+                            ))}
+                        </ul>
                         <button
                             onClick={() => editTodo(todo.id)}
                             className="bg-slate-600 uppercase hover:bg-slate-900 text-white font-bold px-2 py-1 m-1 rounded-2xl">
@@ -47,7 +61,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                     <button
                         onClick={() => editTodo(todo.id)}
                         className="bg-slate-600 uppercase hover:bg-slate-900 text-white font-bold px-2 py-1 m-1 rounded-2xl">
-                        Describe your task
+                        Describe task
                     </button>
                 )}
             </div>
@@ -65,8 +79,12 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                             className="bg-slate-900 border border-white rounded-lg p-2 text-white text-center"
                         />
                         <div className="flex flex-col justify-center m-auto my-6">
-                            <ul className="list-none p-12 border border-white rounded-lg">
-                                SELECTED CATAGORIES
+                            <ul className="flex flex-row list-none p-12 border border-white rounded-lg gap-2">
+                                {categories.map((category, index) => (
+                                    <li key={index} style={{backgroundColor: category.color}} className="rounded-lg p-1 border border-white">
+                                        {category.name}
+                                    </li>
+                                ))}
                             </ul>
                         </div>
                         <div className="flex flex-row justify-center gap-36 m-auto">
@@ -80,19 +98,32 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                         </div>
                     </div>
                     <div className="col-span-3 md:col-span-1 text-center">
-                        <h2 className="uppercase pb-6 text-md">Add Catagories</h2>
-                        <form className="flex flex-col m-2 gap-2">
-                            <label>Catagory Name:</label>
-                            <input className="bg-slate-900 border border-white rounded-lg text-white text-center" type="text" />
+                        <h2 className="uppercase pb-6 text-md">Add Categories</h2>
+                        <form 
+                        className="flex flex-col m-2 gap-2"
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            submitCategory(categoryName, color.hex);
+                        }}
+                        >
+                            <label>Category Name:</label>
+                            <input 
+                            className="bg-slate-900 border border-white rounded-lg text-white text-center" 
+                            type="text" 
+                            onChange={e => setCategoryName(e.target.value)} 
+                            />
                             <h2>Color</h2>
                             <ColorPicker
                                 width={456}
                                 height={100}
                                 color={color}
                                 onChange={setColor}
-                                hideHSV
+                                hideInput={["rgb", "hsv"]}
                                 dark />
-                            <button className="bg-white text-slate-900 rounded-lg p-2">Add as Catagory</button>
+                            <button 
+                            className="bg-white text-slate-900 rounded-lg p-2"
+                            type="submit"
+                            >Add as Category</button>
                         </form>
                     </div>
                 </dialog>

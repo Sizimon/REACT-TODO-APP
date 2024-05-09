@@ -12,9 +12,9 @@ export default function TodoList( {todos, setTodos} ) {
         setEditingItemId(id)
     }
 
-    function editDescription(id, newDescription) {
+    function editDescription(id, newDescription, newCategories) {
         setTodos(todos.map(todo => todo.id === id ? (
-            {...todo, description: newDescription}
+            {...todo, description: newDescription, catagories: newCategories}
         ) : todo
         ));
     }
