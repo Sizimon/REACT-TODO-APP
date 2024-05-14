@@ -18,18 +18,12 @@ export default function Navigation({ createTodo }) {
                     type="text"
                     onChange={e => setTodo(e.target.value)}
                     value={todo}
-                    placeholder="Create a todo..."
+                    placeholder="Name your task!"
                     className="rounded-md px-2 py-1 mx-2" />
                 <button
                     className="bg-slate-600 hover:bg-slate-900 text-white font-bold px-2 py-1 m-1 rounded-2xl"
                     onClick={handleTodo}
                 >Create</button>
-            </div>
-            <div className='mt-4'>
-                <h3 className='text-white'>Add catagories to your todo.</h3>
-            </div>
-            <div className="flex flex-row justify-center">
-                <DropdownCatagories />
             </div>
         </nav>
     )

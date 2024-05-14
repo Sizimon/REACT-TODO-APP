@@ -33,18 +33,22 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
     }
 
     const submitCategory = (categoryName, color) => {
-        setCategories(prevCategories => [...prevCategories, { name: categoryName, color: color }]);
-        setCategoryName('');
+        if (categories.length < 5) {
+            setCategories(prevCategories => [...prevCategories, { name: categoryName, color: color }]);
+            setCategoryName('');
+        } else {
+            alert('You can only have a maximum of 5 categories per task.')
+        }
     }
 
     return (
         <>
-            <div className="col-span-4 md:col-span-2 flex flex-col justify-center items-center border border-slate-400 border-spacing-2 m-4 p-4 gap-6 transition ease-in-out delay-50 hover:shadow-xl duration-500">
+            <div className="col-span-4 md:col-span-4 lg:col-span-2 flex flex-col justify-center items-center border border-slate-400 border-spacing-2 m-4 p-4 gap-6 transition ease-in-out delay-50 hover:shadow-xl duration-500">
                 <h2 className="uppercase font-teko font-medium text-4xl">{todo.task}</h2>
                 {todo.description ? (
                     <>
                         <p className="border border-spacing-2 text-center p-4 rounded-md whitespace-pre-wrap">{todo.description}</p>
-                        <ul className="flex flex-row list-none p-12 border border-white rounded-lg gap-2">
+                        <ul className="flex flex-row list-none p-2 border border-white rounded-lg gap-2">
                             {categories.map((category, index) => (
                                 <li key={index} style={{backgroundColor: category.color}} className="rounded-lg p-1 border border-white">
                                     {category.name}
@@ -58,74 +62,78 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                         </button>
                     </>
                 ) : (
-                    <button
-                        onClick={() => editTodo(todo.id)}
-                        className="bg-slate-600 uppercase hover:bg-slate-900 text-white font-bold px-2 py-1 m-1 rounded-2xl">
-                        Describe task
-                    </button>
+                    <>
+                        <p className="border border-spacing-2 text-center p-4 rounded-md whitespace-pre-wrap">Write a description about your task.</p>
+                        <button
+                            onClick={() => editTodo(todo.id)}
+                            className="bg-slate-600 uppercase hover:bg-slate-900 text-white font-bold px-2 py-1 m-1 rounded-2xl">
+                            Describe task
+                        </button>
+                    </>
                 )}
             </div>
             {todo.isEditing && todo.id === editingItemId && (
                 <dialog
                     ref={dialogRef}
-                    className="grid grid-cols-3 md:grid-cols-3 p-6 rounded-lg border border-white bg-slate-900 text-white">
-                    <div className="col-span-3 md:col-span-2 text-center">
+                    className="grid grid-cols-5 w-full md:w-10/12 lg:w-6/12 p-4 gap-4 rounded-lg border border-slate-900 bg-slate-200 text-black">
+                    <div className="col-span-5 text-center">
                         <h1 className="uppercase pb-6 text-2xl">{todo.task}</h1>
-                        <textarea
-                            value={description}
-                            onChange={e => setDescription(e.target.value)}
-                            cols="52"
-                            rows="12"
-                            className="bg-slate-900 border border-white rounded-lg p-2 text-white text-center"
-                        />
-                        <div className="flex flex-col justify-center m-auto my-6">
-                            <ul className="flex flex-row list-none p-12 border border-white rounded-lg gap-2">
-                                {categories.map((category, index) => (
-                                    <li key={index} style={{backgroundColor: category.color}} className="rounded-lg p-1 border border-white">
-                                        {category.name}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                        <div className="flex flex-row justify-center gap-36 m-auto">
-                            <button className="bg-white text-slate-900 rounded-lg p-2">Woopsie</button>
-                            <button
-                                className="bg-white text-slate-900 rounded-lg p-2"
-                                onClick={() => {
-                                    closeDialog(todo.id);
-                                    editDescription(todo.id, description);
-                                }}>Save & Close</button>
-                        </div>
                     </div>
-                    <div className="col-span-3 md:col-span-1 text-center">
-                        <h2 className="uppercase pb-6 text-md">Add Categories</h2>
+                    <div className="col-span-5 md:col-span-2 text-center content-start">
                         <form 
-                        className="flex flex-col m-2 gap-2"
+                        className="flex flex-col gap-2"
                         onSubmit={(e) => {
                             e.preventDefault();
                             submitCategory(categoryName, color.hex);
                         }}
                         >
-                            <label>Category Name:</label>
                             <input 
-                            className="bg-slate-900 border border-white rounded-lg text-white text-center" 
+                            className="bg-white rounded-lg text-black p-1" 
+                            placeholder="Create a category."
                             type="text" 
+                            value={categoryName}
                             onChange={e => setCategoryName(e.target.value)} 
                             />
-                            <h2>Color</h2>
                             <ColorPicker
                                 width={456}
-                                height={100}
+                                height={160}
                                 color={color}
                                 onChange={setColor}
-                                hideInput={["rgb", "hsv"]}
-                                dark />
+                                hideInput={["rgb", "hsv"]} 
+                                />
                             <button 
                             className="bg-white text-slate-900 rounded-lg p-2"
                             type="submit"
                             >Add as Category</button>
                         </form>
                     </div>
+                    <div className="col-span-5 md:col-span-3 text-center content-start">
+                        <textarea
+                            value={description}
+                            placeholder="Describe your task."
+                            onChange={e => setDescription(e.target.value)}
+                            rows="12"
+                            className="bg-white border rounded-lg p-2 text-black resize-none border-none w-full"
+                        />
+                        <div className="flex flex-col justify-center my-2">
+                            <ul className="flex flex-row list-none p-auto justify-center">
+                                {categories.map((category, index) => (
+                                    <li key={index} style={{backgroundColor: category.color}} className="rounded-lg p-1 mx-1 border border-white">
+                                        {category.name}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div className="flex flex-row justify-center gap-36 m-auto">
+                            <button
+                                className="bg-white text-slate-900 rounded-lg p-2"
+                                onClick={() => {
+                                    closeDialog(todo.id);
+                                    editDescription(todo.id, description, categories);
+                                }}>Save & Close</button>
+                        </div>
+                    </div>
+                    
                 </dialog>
             )}
         </>
