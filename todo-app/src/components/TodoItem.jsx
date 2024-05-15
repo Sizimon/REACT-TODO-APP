@@ -33,11 +33,13 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
     }
 
     const submitCategory = (categoryName, color) => {
-        if (categories.length < 5) {
+        if (categories.length < 5 && categoryName.length > 0) {
             setCategories(prevCategories => [...prevCategories, { name: categoryName, color: color }]);
             setCategoryName('');
+        } else if (categoryName === '') {
+            alert('Your category must have a name.')
         } else {
-            alert('You can only have a maximum of 5 categories per task.')
+            alert('You can have a maximum of 5 categories per task.')
         }
     }
 
@@ -55,20 +57,32 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                                 </li>
                             ))}
                         </ul>
-                        <button
-                            onClick={() => editTodo(todo.id)}
-                            className="bg-slate-600 uppercase hover:bg-slate-900 text-white font-bold px-2 py-1 m-1 rounded-2xl">
-                            Edit
-                        </button>
+                        <div className="flex flex-row">
+                            <button
+                                onClick={() => editTodo(todo.id)}
+                                className="bg-slate-600 uppercase hover:bg-slate-900 text-white font-bold px-2 py-1 m-1 rounded-2xl">
+                                Edit Task
+                            </button>
+                            <button
+                                className="bg-slate-600 uppercase hover:bg-slate-900 text-white font-bold px-2 py-1 m-1 rounded-2xl">
+                                Delete Task
+                            </button>
+                        </div>
                     </>
                 ) : (
                     <>
-                        <p className="border border-spacing-2 text-center p-4 rounded-md whitespace-pre-wrap">Write a description about your task.</p>
-                        <button
-                            onClick={() => editTodo(todo.id)}
-                            className="bg-slate-600 uppercase hover:bg-slate-900 text-white font-bold px-2 py-1 m-1 rounded-2xl">
-                            Describe task
-                        </button>
+                        <p className="text-center p-4 whitespace-pre-wrap">Write a description about your task.</p>
+                        <div className="flex flex-row">
+                            <button
+                                onClick={() => editTodo(todo.id)}
+                                className="bg-slate-600 uppercase hover:bg-slate-900 text-white font-bold px-2 py-1 m-1 rounded-2xl">
+                                Describe task
+                            </button>
+                            <button
+                                className="bg-slate-600 uppercase hover:bg-slate-900 text-white font-bold px-2 py-1 m-1 rounded-2xl">
+                                Delete Task
+                            </button>
+                        </div>
                     </>
                 )}
             </div>
