@@ -42,19 +42,8 @@ export default function TodoList({ todos, setTodos }) {
                         />
                     ))}
                 </div>
-            )
+            ) 
             }
-            {/* <div className="grid grid-cols-4 gap-4">
-                {todos.map((todo, index) => (
-                    <TodoItem
-                        key={index}
-                        todo={todo}
-                        editTodo={editTodo}
-                        editingItemId={editingItemId}
-                        editDescription={editDescription}
-                    />
-                ))}
-            </div> */}
         </>
     )
 }

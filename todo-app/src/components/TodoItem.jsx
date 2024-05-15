@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ColorPicker, useColor } from "react-color-palette";
 import "react-color-palette/css";
+import { FaThumbtack, FaTrash } from "react-icons/fa";
 
 export default function TodoItem({ todo, editTodo, editingItemId, editDescription, deleteTodo }) {
     const dialogRef = useRef(null);
@@ -45,8 +46,17 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
 
     return (
         <>
-            <div className="col-span-4 md:col-span-4 lg:col-span-2 flex flex-col justify-center items-center border border-slate-400 border-spacing-2 m-4 p-4 gap-6 transition ease-in-out delay-50 hover:shadow-xl duration-500">
-                <h2 className="uppercase font-teko font-medium text-4xl">{todo.task}</h2>
+            <div className="border-box col-span-4 md:col-span-4 lg:col-span-2 flex flex-col justify-center items-center border border-slate-400 border-spacing-2 m-2 p-4 transition ease-in-out delay-50 hover:shadow-xl duration-500">
+                <div className="flex flex-row justify-between w-full">
+                    <FaTrash
+                    onClick={() => deleteTodo(todo.id)}
+                    className="text-red-500 hover:text-red-700 cursor-pointer transform hover:scale-110 transition ease-in-out duration-300"
+                    />
+                    <h2 className="uppercase font-teko font-medium text-4xl">{todo.task}</h2>
+                    <FaThumbtack
+                    className="text-amber-300 hover:text-amber-500 cursor-pointer transform hover:scale-110 transition ease-in-out duration-300"
+                    />
+                </div>
                 {todo.description ? (
                     <>
                         <p className="border border-spacing-2 text-center p-4 rounded-md whitespace-pre-wrap">{todo.description}</p>
@@ -64,9 +74,8 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                                 Edit Task
                             </button>
                             <button
-                                onClick={() => deleteTodo(todo.id)}
-                                className="bg-slate-600 uppercase hover:bg-slate-900 text-white font-bold px-2 py-1 m-1 rounded-2xl">
-                                Delete Task
+                                className="bg-white uppercase text-green-400 border border-green-400 hover:bg-green-400 hover:text-white hover:border-white  font-bold px-2 py-1 m-1 rounded-2xl">
+                                Mark Completed
                             </button>
                         </div>
                     </>
@@ -78,11 +87,6 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                                 onClick={() => editTodo(todo.id)}
                                 className="bg-slate-600 uppercase hover:bg-slate-900 text-white font-bold px-2 py-1 m-1 rounded-2xl">
                                 Describe task
-                            </button>
-                            <button
-                                onClick={() => deleteTodo(todo.id)}
-                                className="bg-slate-600 uppercase hover:bg-slate-900 text-white font-bold px-2 py-1 m-1 rounded-2xl">
-                                Delete Task
                             </button>
                         </div>
                     </>
@@ -125,6 +129,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                     </div>
                     <div className="col-span-5 md:col-span-3 text-center content-start">
                         <textarea
+                            required
                             value={description}
                             placeholder="Describe your task."
                             onChange={e => setDescription(e.target.value)}

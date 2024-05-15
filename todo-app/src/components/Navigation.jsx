@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState } from 'react'
-import DropdownCatagories from './DropdownCatagories'
 
 export default function Navigation({ createTodo }) {
     const [todo, setTodo] = useState('')

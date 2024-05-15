@@ -17,7 +17,8 @@ export default function TodoWrapper() {
                 description: '', // This will be used to describe the task
                 catagories: null, // This will be used to filter todos by catagory
                 completed: false, // This will be used to mark a task as completed or in progress
-                isEditing: false // This will be state to determine if a task is being edited
+                isEditing: false,
+                priority: false // This will be state to determine if a task is being edited
                 }])
             }
     }
