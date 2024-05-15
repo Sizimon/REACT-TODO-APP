@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { ColorPicker, useColor } from "react-color-palette";
 import "react-color-palette/css";
 
-export default function TodoItem({ todo, editTodo, editingItemId, editDescription }) {
+export default function TodoItem({ todo, editTodo, editingItemId, editDescription, deleteTodo }) {
     const dialogRef = useRef(null);
     const [description, setDescription] = useState(todo.description);
     const [color, setColor] = useColor("#ffffff");
@@ -64,6 +64,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                                 Edit Task
                             </button>
                             <button
+                                onClick={() => deleteTodo(todo.id)}
                                 className="bg-slate-600 uppercase hover:bg-slate-900 text-white font-bold px-2 py-1 m-1 rounded-2xl">
                                 Delete Task
                             </button>
@@ -79,6 +80,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                                 Describe task
                             </button>
                             <button
+                                onClick={() => deleteTodo(todo.id)}
                                 className="bg-slate-600 uppercase hover:bg-slate-900 text-white font-bold px-2 py-1 m-1 rounded-2xl">
                                 Delete Task
                             </button>

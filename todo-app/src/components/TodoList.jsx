@@ -19,6 +19,10 @@ export default function TodoList({ todos, setTodos }) {
         ));
     }
 
+    function deleteTodo(id) {
+        setTodos(todos.filter(todo => todo.id !== id));
+    }
+
     return (
         <>
             {todos.length === 0 ? (
@@ -34,6 +38,7 @@ export default function TodoList({ todos, setTodos }) {
                             editTodo={editTodo}
                             editingItemId={editingItemId}
                             editDescription={editDescription}
+                            deleteTodo={deleteTodo}
                         />
                     ))}
                 </div>
