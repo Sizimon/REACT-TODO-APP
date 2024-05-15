@@ -2,6 +2,7 @@ import {useState} from "react"
 import Navigation from "./Navigation"
 import TodoList from "./TodoList";
 import { v4 as uuidv4 } from 'uuid' // Used as a unique identifier for each todo item
+import Footer from "./Footer";
 uuidv4();
 
 
@@ -24,9 +25,10 @@ export default function TodoWrapper() {
     }
 
     return (
-        <div className="flex flex-col h-screen">
+        <div className="flex flex-col h-screen justify-between">
             <Navigation createTodo={createTodo}/>
             <TodoList todos={todos} setTodos={setTodos}/>
+            <Footer />
         </div>
     )
 }

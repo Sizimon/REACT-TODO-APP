@@ -10,7 +10,7 @@ export default function Navigation({ createTodo }) {
     }
 
     return (
-        <nav className="flex flex-col justify-center items-center bg-gray-800 p-4 w-auto">
+        <nav className="flex flex-col justify-center items-center bg-gray-800 p-4 w-full sticky z-10 top-0">
             <div>
                 <input
                     required
