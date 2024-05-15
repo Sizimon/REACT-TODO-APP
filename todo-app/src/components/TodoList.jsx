@@ -23,6 +23,13 @@ export default function TodoList({ todos, setTodos }) {
         setTodos(todos.filter(todo => todo.id !== id));
     }
 
+    function changePriority(id) {
+        setTodos(todos.map(todo => todo.id === id ? (
+            { ...todo, priority: !todo.priority }
+        ) : todo
+        ));
+    }
+
     return (
         <>
             {todos.length === 0 ? (
@@ -39,6 +46,7 @@ export default function TodoList({ todos, setTodos }) {
                             editingItemId={editingItemId}
                             editDescription={editDescription}
                             deleteTodo={deleteTodo}
+                            changePriority={changePriority}
                         />
                     ))}
                 </div>

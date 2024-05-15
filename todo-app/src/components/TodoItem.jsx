@@ -3,7 +3,7 @@ import { ColorPicker, useColor } from "react-color-palette";
 import "react-color-palette/css";
 import { FaThumbtack, FaTrash } from "react-icons/fa";
 
-export default function TodoItem({ todo, editTodo, editingItemId, editDescription, deleteTodo }) {
+export default function TodoItem({ todo, editTodo, editingItemId, editDescription, deleteTodo, changePriority }) {
     const dialogRef = useRef(null);
     const [description, setDescription] = useState(todo.description);
     const [color, setColor] = useColor("#ffffff");
@@ -44,6 +44,8 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
         }
     }
 
+    console.log(todo)
+
     return (
         <>
             <div className="border-box col-span-4 md:col-span-4 lg:col-span-2 flex flex-col justify-center items-center border border-slate-400 border-spacing-2 m-2 p-4 transition ease-in-out delay-50 hover:shadow-xl duration-500">
@@ -54,6 +56,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                     />
                     <h2 className="uppercase font-teko font-medium text-4xl">{todo.task}</h2>
                     <FaThumbtack
+                    onClick={() => changePriority(todo.id)}
                     className="text-amber-300 hover:text-amber-500 cursor-pointer transform hover:scale-110 transition ease-in-out duration-300"
                     />
                 </div>
