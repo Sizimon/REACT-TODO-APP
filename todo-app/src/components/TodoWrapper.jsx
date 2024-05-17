@@ -25,7 +25,7 @@ export default function TodoWrapper() {
     }
 
     return (
-        <div className="flex flex-col h-screen justify-between">
+        <div className="flex flex-col h-screen">
             <Navigation createTodo={createTodo}/>
             <TodoList todos={todos} setTodos={setTodos}/>
             <Footer />

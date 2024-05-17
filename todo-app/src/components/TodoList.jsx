@@ -37,7 +37,7 @@ export default function TodoList({ todos, setTodos }) {
                     <h1 className="text-4xl text-center font-teko">No Task Set</h1>
                     <p className="text-center">To create a new task, please name your task and click the create key.<br/> After creating a task you will be able to write more about your task and customise it to your personal needs!</p>
                 </div>) : (
-                <div className="grid grid-cols-4 gap-4">
+                <div className="grid grid-cols-4 overflow-scroll">
                     {todos.map((todo, index) => (
                         <TodoItem
                             key={index}

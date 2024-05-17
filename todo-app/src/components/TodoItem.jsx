@@ -46,7 +46,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
 
     return (
         <>
-            <div className="border-box col-span-4 md:col-span-4 lg:col-span-2 flex flex-col justify-between items-center border border-slate-400 border-spacing-2 m-2 p-4 transition ease-in-out delay-50 hover:shadow-xl duration-500">
+            <div className={`border-box col-span-4 md:col-span-4 lg:col-span-2 flex flex-col justify-between items-center border ${todo.priority ? "border-red-500" : "border-slate-400"} border-slate-400  border-spacing-2 m-2 p-4 transition ease-in-out delay-50 hover:shadow-xl shadow-slate-400 duration-500`}>
                 <div className="flex flex-row justify-between w-full">
                     <FaTrash
                     onClick={() => deleteTodo(todo.id)}
