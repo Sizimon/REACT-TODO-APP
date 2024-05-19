@@ -4,6 +4,12 @@
 
 
 
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 .rcp-root{--rcp-background-color: #FFFFFF;--rcp-field-input-color: #0f172a;--rcp-field-input-border-color: #e2e8f0;}
 
 dialog::backdrop {
