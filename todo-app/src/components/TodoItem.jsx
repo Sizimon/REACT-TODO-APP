@@ -46,17 +46,23 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
 
     return (
         <>
-            <div className={`border-box col-span-4 md:col-span-4 lg:col-span-2 flex flex-col justify-between items-center overflow-hidden border ${todo.priority ? "border-red-500" : "border-slate-400"} border-spacing-2 m-2 p-4 transition ease-in-out delay-50 hover:shadow-xl shadow-slate-400 duration-500`}>
+            <div className={`border-box col-span-4 md:col-span-4 lg:col-span-2 flex flex-col justify-between items-center overflow-hidden border ${todo.priority ? "border-amber-500" : "border-slate-400"} border-spacing-2 m-2 p-4 transition ease-in-out delay-50 ${todo.priority ? "shadow-amber-500" : "shadow-slate-400"} hover:shadow-xl duration-500`}>
                 <div className="flex flex-row justify-between w-full">
-                    <FaTrash
-                    onClick={() => deleteTodo(todo.id)}
-                    className="text-red-500 hover:text-red-700 cursor-pointer transform hover:scale-110 transition ease-in-out duration-300"
-                    />
+                    <div className="flex flex-row items-center gap-1">
+                        <FaTrash
+                        onClick={() => deleteTodo(todo.id)}
+                        className="text-red-500 hover:text-red-700 cursor-pointer transform hover:scale-110 transition ease-in-out duration-300"
+                        />
+                        <p className="text-sm text-slate-500">Delete</p>
+                    </div>
                     <h2 className="uppercase font-teko font-medium text-4xl">{todo.task}</h2>
-                    <FaThumbtack
-                    onClick={() => changePriority(todo.id)}
-                    className="text-amber-300 hover:text-amber-500 cursor-pointer transform hover:scale-110 transition ease-in-out duration-300"
-                    />
+                    <div className="flex flex-row items-center gap-1">
+                    <p className="text-sm text-slate-500">Prioritise</p>
+                        <FaThumbtack
+                        onClick={() => changePriority(todo.id)}
+                        className="text-amber-300 hover:text-amber-500 cursor-pointer transform hover:scale-110 transition ease-in-out duration-300"
+                        />
+                    </div>
                 </div>
                 {todo.description ? (
                     <>
@@ -71,7 +77,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                         <div className="flex flex-row">
                             <button
                                 onClick={() => editTodo(todo.id)}
-                                className="bg-slate-600 uppercase hover:bg-slate-900 text-white font-bold px-2 py-1 m-1 rounded-2xl">
+                                className="bg-white uppercase text-slate-600 border border-slate-600 font-bold px-2 py-1 m-1 rounded-2xl hover:bg-slate-600 hover:text-white">
                                 Edit Task
                             </button>
                             <button

@@ -30,27 +30,58 @@ export default function TodoList({ todos, setTodos }) {
         ));
     }
 
+    const priorityTodos = todos.filter(todo => todo.priority)
+    const nonPriorityTodos = todos.filter(todo => !todo.priority)
+
     return (
         <>
             {todos.length === 0 ? (
                 <div className="flex flex-col flex-grow justify-center items-center p-2 h-full overflow-auto">
                     <h1 className="text-4xl text-center font-teko">No Task Set</h1>
-                    <p className="text-center">To create a new task, please name your task and click the create key.<br/> After creating a task you will be able to write more about your task and customise it to your personal needs!</p>
+                    <p className="text-center">To create a new task, please name your task and click the create key.<br /> After creating a task you will be able to write more about your task and customise it to your personal needs!</p>
                 </div>) : (
-                <div className="grid grid-cols-4">
-                    {todos.map((todo, index) => (
-                        <TodoItem
-                            key={index}
-                            todo={todo}
-                            editTodo={editTodo}
-                            editingItemId={editingItemId}
-                            editDescription={editDescription}
-                            deleteTodo={deleteTodo}
-                            changePriority={changePriority}
-                        />
-                    ))}
-                </div>
-            ) 
+                <>
+                    <div className="flex flex-col text-center my-4 text-4xl">
+                        <h1>PRIORITY TASKS</h1>
+                    </div>
+                    {priorityTodos.length === 0 ? (
+                        <div className="flex flex-col flex-grow justify-center items-center p-2 h-full overflow-auto">
+                            <h1 className="text-4xl text-center font-teko">No Priority Task Set</h1>
+                            <p className="text-center">To create a new task, please name your task and click the create key.<br /> After creating a task you will be able to write more about your task and customise it to your personal needs!</p>
+                        </div>
+                    ) : (
+                        <div className="grid grid-cols-4">
+                        {priorityTodos.map((todo, index) => (
+                            <TodoItem
+                                key={index}
+                                todo={todo}
+                                editTodo={editTodo}
+                                editingItemId={editingItemId}
+                                editDescription={editDescription}
+                                deleteTodo={deleteTodo}
+                                changePriority={changePriority}
+                            />
+                        ))}
+                    </div>
+                    )}
+                    <div className="flex flex-col text-center my-4 text-4xl">
+                        <h1>OTHER TASKS</h1>
+                    </div>
+                    <div className="grid grid-cols-4">
+                        {nonPriorityTodos.map((todo, index) => (
+                            <TodoItem
+                                key={index}
+                                todo={todo}
+                                editTodo={editTodo}
+                                editingItemId={editingItemId}
+                                editDescription={editDescription}
+                                deleteTodo={deleteTodo}
+                                changePriority={changePriority}
+                            />
+                        ))}
+                    </div>
+                </>
+            )
             }
         </>
     )
