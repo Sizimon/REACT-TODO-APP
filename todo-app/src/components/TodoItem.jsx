@@ -44,6 +44,10 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
         }
     }
 
+    const removeCategory = (index) => {
+        setCategories(prevCategories => prevCategories.filter((_, i) => i !== index));
+    }
+
     return (
         <>
             <div className={`border-box col-span-4 md:col-span-4 lg:col-span-2 flex flex-col justify-between items-center overflow-hidden border ${todo.priority ? "border-amber-500" : "border-slate-400"} border-spacing-2 m-2 p-4 transition ease-in-out delay-50 ${todo.priority ? "shadow-amber-500" : "shadow-slate-400"} hover:shadow-xl duration-500`}>
@@ -146,7 +150,12 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                         <div className="flex flex-col justify-center my-2">
                             <ul className="flex flex-row list-none p-auto justify-center">
                                 {categories.map((category, index) => (
-                                    <li key={index} style={{backgroundColor: category.color}} className="rounded-lg p-1 mx-1 border border-white">
+                                    <li
+                                    key={index}
+                                    style={{backgroundColor: category.color}} 
+                                    onClick={() => removeCategory(index)}
+                                    className="rounded-lg p-1 mx-1 border border-white cursor-pointer"
+                                    >
                                         {category.name}
                                     </li>
                                 ))}
