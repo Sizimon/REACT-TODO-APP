@@ -30,6 +30,13 @@ export default function TodoList({ todos, setTodos }) {
         ));
     }
 
+    function markComplete(id) {
+        setTodos(todos.map(todo => todo.id === id ? (
+            { ...todo, completed: !todo.completed }
+        ) : todo
+        ));
+    }
+
     const priorityTodos = todos.filter(todo => todo.priority)
     const nonPriorityTodos = todos.filter(todo => !todo.priority)
 
@@ -60,6 +67,7 @@ export default function TodoList({ todos, setTodos }) {
                                 editDescription={editDescription}
                                 deleteTodo={deleteTodo}
                                 changePriority={changePriority}
+                                markComplete={markComplete}
                             />
                         ))}
                     </div>
@@ -77,6 +85,7 @@ export default function TodoList({ todos, setTodos }) {
                                 editDescription={editDescription}
                                 deleteTodo={deleteTodo}
                                 changePriority={changePriority}
+                                markComplete={markComplete}
                             />
                         ))}
                     </div>

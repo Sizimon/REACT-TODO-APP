@@ -3,7 +3,7 @@ import { ColorPicker, useColor } from "react-color-palette";
 import "react-color-palette/css";
 import { FaThumbtack, FaTrash } from "react-icons/fa";
 
-export default function TodoItem({ todo, editTodo, editingItemId, editDescription, deleteTodo, changePriority }) {
+export default function TodoItem({ todo, editTodo, editingItemId, editDescription, deleteTodo, changePriority, markComplete }) {
     const dialogRef = useRef(null);
     const [description, setDescription] = useState(todo.description);
     const [color, setColor] = useColor("#ffffff");
@@ -50,59 +50,60 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
 
     return (
         <>
-            <div className={`border-box col-span-4 md:col-span-4 lg:col-span-2 flex flex-col justify-between items-center overflow-hidden border ${todo.priority ? "border-amber-500" : "border-slate-400"} border-spacing-2 m-2 p-4 transition ease-in-out delay-50 ${todo.priority ? "shadow-amber-500" : "shadow-slate-400"} hover:shadow-xl duration-500`}>
-                <div className="flex flex-row justify-between w-full">
-                    <div className="flex flex-row items-center gap-1">
-                        <FaTrash
-                        onClick={() => deleteTodo(todo.id)}
-                        className="text-red-500 hover:text-red-700 cursor-pointer transform hover:scale-110 transition ease-in-out duration-300"
-                        />
-                        <p className="text-sm text-slate-500">Delete</p>
+                <div className={`border-box col-span-4 md:col-span-4 lg:col-span-2 flex flex-col justify-between items-center overflow-hidden border ${todo.priority ? "border-amber-500" : "border-slate-400"} border-spacing-2 m-2 p-4 transition ease-in-out delay-50 ${todo.priority ? "shadow-amber-500" : "shadow-slate-400"} hover:shadow-xl duration-500`}>
+                    <div className="flex flex-row justify-between w-full">
+                        <div className="flex flex-row items-center gap-1">
+                            <FaTrash
+                                onClick={() => deleteTodo(todo.id)}
+                                className="text-red-500 hover:text-red-700 cursor-pointer transform hover:scale-110 transition ease-in-out duration-300"
+                            />
+                            <p className="text-sm text-slate-500">Delete</p>
+                        </div>
+                        <h2 className="uppercase font-teko font-medium text-4xl">{todo.task}</h2>
+                        <div className="flex flex-row items-center gap-1">
+                            <p className="text-sm text-slate-500">Prioritise</p>
+                            <FaThumbtack
+                                onClick={() => changePriority(todo.id)}
+                                className="text-amber-300 hover:text-amber-500 cursor-pointer transform hover:scale-110 transition ease-in-out duration-300"
+                            />
+                        </div>
                     </div>
-                    <h2 className="uppercase font-teko font-medium text-4xl">{todo.task}</h2>
-                    <div className="flex flex-row items-center gap-1">
-                    <p className="text-sm text-slate-500">Prioritise</p>
-                        <FaThumbtack
-                        onClick={() => changePriority(todo.id)}
-                        className="text-amber-300 hover:text-amber-500 cursor-pointer transform hover:scale-110 transition ease-in-out duration-300"
-                        />
-                    </div>
+                    {todo.description ? (
+                        <>
+                            <p className="text-center p-4 rounded-md whitespace-pre-wrap break-words">{todo.description}</p>
+                            <ul className="flex flex-row list-none p-2 border border-white rounded-lg gap-2">
+                                {categories.map((category, index) => (
+                                    <li key={index} style={{ backgroundColor: category.color }} className="rounded-lg p-1 border border-white">
+                                        {category.name}
+                                    </li>
+                                ))}
+                            </ul>
+                            <div className="flex flex-row">
+                                <button
+                                    onClick={() => editTodo(todo.id)}
+                                    className="bg-white uppercase text-slate-600 border border-slate-600 font-bold px-2 py-1 m-1 rounded-2xl hover:bg-slate-600 hover:text-white">
+                                    Edit Task
+                                </button>
+                                <button
+                                    onClick={() => markComplete(todo.id)}
+                                    className="bg-white uppercase text-green-400 border border-green-400 hover:bg-green-400 hover:text-white hover:border-white  font-bold px-2 py-1 m-1 rounded-2xl">
+                                    Mark Completed
+                                </button>
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <p className="text-center p-4 whitespace-pre-wrap">Write a description about your task.</p>
+                            <div className="flex flex-row">
+                                <button
+                                    onClick={() => editTodo(todo.id)}
+                                    className="bg-slate-600 uppercase hover:bg-slate-900 text-white font-bold px-2 py-1 m-1 rounded-2xl">
+                                    Describe task
+                                </button>
+                            </div>
+                        </>
+                    )}
                 </div>
-                {todo.description ? (
-                    <>
-                        <p className="text-center p-4 rounded-md whitespace-pre-wrap break-words">{todo.description}</p>
-                        <ul className="flex flex-row list-none p-2 border border-white rounded-lg gap-2">
-                            {categories.map((category, index) => (
-                                <li key={index} style={{backgroundColor: category.color}} className="rounded-lg p-1 border border-white">
-                                    {category.name}
-                                </li>
-                            ))}
-                        </ul>
-                        <div className="flex flex-row">
-                            <button
-                                onClick={() => editTodo(todo.id)}
-                                className="bg-white uppercase text-slate-600 border border-slate-600 font-bold px-2 py-1 m-1 rounded-2xl hover:bg-slate-600 hover:text-white">
-                                Edit Task
-                            </button>
-                            <button
-                                className="bg-white uppercase text-green-400 border border-green-400 hover:bg-green-400 hover:text-white hover:border-white  font-bold px-2 py-1 m-1 rounded-2xl">
-                                Mark Completed
-                            </button>
-                        </div>
-                    </>
-                ) : (
-                    <>
-                        <p className="text-center p-4 whitespace-pre-wrap">Write a description about your task.</p>
-                        <div className="flex flex-row">
-                            <button
-                                onClick={() => editTodo(todo.id)}
-                                className="bg-slate-600 uppercase hover:bg-slate-900 text-white font-bold px-2 py-1 m-1 rounded-2xl">
-                                Describe task
-                            </button>
-                        </div>
-                    </>
-                )}
-            </div>
             {todo.isEditing && todo.id === editingItemId && (
                 <dialog
                     ref={dialogRef}
@@ -111,30 +112,30 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                         <h1 className="uppercase pb-6 text-2xl">{todo.task}</h1>
                     </div>
                     <div className="col-span-5 md:col-span-2 text-center content-start">
-                        <form 
-                        className="flex flex-col gap-2"
-                        onSubmit={(e) => {
-                            e.preventDefault();
-                            submitCategory(categoryName, color.hex);
-                        }}
+                        <form
+                            className="flex flex-col gap-2"
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                submitCategory(categoryName, color.hex);
+                            }}
                         >
-                            <input 
-                            className="bg-white rounded-lg text-black p-1" 
-                            placeholder="Create a category."
-                            type="text" 
-                            value={categoryName}
-                            onChange={e => setCategoryName(e.target.value)} 
+                            <input
+                                className="bg-white rounded-lg text-black p-1"
+                                placeholder="Create a category."
+                                type="text"
+                                value={categoryName}
+                                onChange={e => setCategoryName(e.target.value)}
                             />
                             <ColorPicker
                                 width={456}
                                 height={160}
                                 color={color}
                                 onChange={setColor}
-                                hideInput={["rgb", "hsv"]} 
-                                />
-                            <button 
-                            className="bg-white text-slate-900 rounded-lg p-2"
-                            type="submit"
+                                hideInput={["rgb", "hsv"]}
+                            />
+                            <button
+                                className="bg-white text-slate-900 rounded-lg p-2"
+                                type="submit"
                             >Add as Category</button>
                         </form>
                     </div>
@@ -151,10 +152,10 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                             <ul className="flex flex-row list-none p-auto justify-center">
                                 {categories.map((category, index) => (
                                     <li
-                                    key={index}
-                                    style={{backgroundColor: category.color}} 
-                                    onClick={() => removeCategory(index)}
-                                    className="rounded-lg p-1 mx-1 border border-white cursor-pointer"
+                                        key={index}
+                                        style={{ backgroundColor: category.color }}
+                                        onClick={() => removeCategory(index)}
+                                        className="rounded-lg p-1 mx-1 border border-white cursor-pointer"
                                     >
                                         {category.name}
                                     </li>
@@ -170,7 +171,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                                 }}>Save & Close</button>
                         </div>
                     </div>
-                    
+
                 </dialog>
             )}
         </>
