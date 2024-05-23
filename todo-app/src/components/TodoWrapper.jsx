@@ -16,7 +16,7 @@ export default function TodoWrapper() {
                 {id: uuidv4(),
                 task: todo, // This will be used to display the users input task
                 description: '', // This will be used to describe the task
-                catagories: null, // This will be used to filter todos by catagory
+                catagories: [], // This will be used to filter todos by catagory
                 completed: false, // This will be used to mark a task as completed or in progress
                 isEditing: false,
                 priority: false // This will be state to determine if a task is being edited
