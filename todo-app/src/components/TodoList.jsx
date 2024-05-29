@@ -58,16 +58,49 @@ export default function TodoList({ todos, setTodos }) {
 
     return (
         <>
-            <div className="flex flex-row justify-evenly md:justify-center md:gap-4  items-center bg-slate-200 p-4 rounded-b-3xl">
+            <div className="flex flex-row justify-evenly md:justify-center md:gap-2  items-center bg-slate-200 p-4 rounded-b-3xl">
                 <input
                     type="text"
                     placeholder="Search tasks..."
                     className="rounded-lg p-1"
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
-                <input type="checkbox" name="priority" id="priority" value="priority" onChange={(e) => setPriorityChecked(e.target.checked)} /><label htmlFor="priority">Priority</label><br />
-                <input type="checkbox" name="overdue" id="overdue" value="overdue" onChange={(e) => setOverdueChecked(e.target.checked)} /><label htmlFor="overdue">Overdue</label><br />
-                <input type="checkbox" name="completed" id="completed" value="completed" onChange={(e) => setCompletedChecked(e.target.checked)} /><label htmlFor="completed">Completed</label>
+                <input
+                    type="checkbox"
+                    name="priority"
+                    id="priority"
+                    value="priority"
+                    onChange={(e) => setPriorityChecked(e.target.checked)}
+                    className="peer relative appearance-none 
+                    w-4 h-4 border 
+                    rounded-full border-red-400 
+                    cursor-pointer  
+                    checked:bg-amber-500"/>
+                <label htmlFor="priority" className="text-slate-600">Priority</label><br />
+                <input
+                    type="checkbox"
+                    name="overdue"
+                    id="overdue"
+                    value="overdue"
+                    onChange={(e) => setOverdueChecked(e.target.checked)}
+                    className="peer relative appearance-none 
+                    w-4 h-4 border 
+                    rounded-full border-red-400 
+                    cursor-pointer  
+                    checked:bg-red-500" />
+                <label htmlFor="overdue" className="text-slate-600">Overdue</label><br />
+                <input
+                    type="checkbox"
+                    name="completed"
+                    id="completed"
+                    value="completed"
+                    onChange={(e) => setCompletedChecked(e.target.checked)}
+                    className="peer relative appearance-none 
+                    w-4 h-4 border 
+                    rounded-full border-red-400 
+                    cursor-pointer  
+                    checked:bg-green-500" />
+                <label htmlFor="completed" className="text-slate-600">Completed</label>
                 {/* <span className="bg-white p-1 rounded-lg flex flex-row items-center gap-1">Filter <FaAngleDown /></span> */}
             </div>
             {todos.length === 0 ? (
