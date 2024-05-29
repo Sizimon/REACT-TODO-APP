@@ -39,7 +39,7 @@ export default function TodoList({ todos, setTodos }) {
         ));
     }
 
-    const filteredTodos = todos.filter(todo => todo.task.toLowerCase().includes(searchTerm.toLowerCase()))
+    const filteredTodos = todos.filter(todo => todo.task.toLowerCase().startsWith(searchTerm.toLowerCase()))
 
     return (
         <>
@@ -50,7 +50,10 @@ export default function TodoList({ todos, setTodos }) {
                     className="rounded-lg p-1"
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
-                <span className="bg-white p-1 rounded-lg flex flex-row items-center gap-1">Filter <FaAngleDown /></span>
+                <input type="checkbox" name="priority" id="priority" value="priority"/><label htmlFor="priority">Priority</label><br/>
+                <input type="checkbox" name="overdue" id="overdue" value="overdue"/><label htmlFor="overdue">Overdue</label><br/>
+                <input type="checkbox" name="completed" id="completed" value="completed"/><label htmlFor="completed">Completed</label>
+                {/* <span className="bg-white p-1 rounded-lg flex flex-row items-center gap-1">Filter <FaAngleDown /></span> */}
             </div>
             {todos.length === 0 ? (
                 <div className="flex flex-col flex-grow justify-center items-center p-2 h-full overflow-auto">
@@ -72,19 +75,38 @@ export default function TodoList({ todos, setTodos }) {
                             />
                         ))
                     ) : (
-                        filteredTodos.map((todo, index) => (
-                            <TodoItem
-                                key={index}
-                                todo={todo}
-                                editTodo={editTodo}
-                                editingItemId={editingItemId}
-                                editDescription={editDescription}
-                                deleteTodo={deleteTodo}
-                                changePriority={changePriority}
-                                markComplete={markComplete}
-                            />
-                        ))
-                    
+                        filteredTodos.length > 0 ? (
+                            filteredTodos.map((todo, index) => (
+                                <TodoItem
+                                    key={index}
+                                    todo={todo}
+                                    editTodo={editTodo}
+                                    editingItemId={editingItemId}
+                                    editDescription={editDescription}
+                                    deleteTodo={deleteTodo}
+                                    changePriority={changePriority}
+                                    markComplete={markComplete}
+                                />
+                            ))
+                        ) : (
+                            <div className="flex flex-col flex-grow justify-center items-center p-2 h-full overflow-auto col-span-4">
+                                <h1 className="text-4xl text-center font-teko">No Matching Task</h1>
+                                <p className="text-center">Please try again.</p>
+                            </div>
+                        )
+
+                        // filteredTodos.map((todo, index) => (
+                        //     <TodoItem
+                        //         key={index}
+                        //         todo={todo}
+                        //         editTodo={editTodo}
+                        //         editingItemId={editingItemId}
+                        //         editDescription={editDescription}
+                        //         deleteTodo={deleteTodo}
+                        //         changePriority={changePriority}
+                        //         markComplete={markComplete}
+                        //     />
+                        // ))
                     )}
                 </div>
             )}
