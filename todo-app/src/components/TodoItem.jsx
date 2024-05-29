@@ -52,7 +52,13 @@ console.log(todo.catagories)
 
     return (
         <>
-                <div className={`border-box col-span-4 md:col-span-4 lg:col-span-2 flex flex-col justify-between items-center overflow-hidden border ${todo.priority ? "border-amber-500" : "border-slate-400"} border-spacing-2 m-2 p-4 transition ease-in-out delay-50 ${todo.priority ? "shadow-amber-500" : "shadow-slate-400"} hover:shadow-xl duration-500`}>
+                <div className={`relative border-box col-span-4 md:col-span-4 lg:col-span-2 flex flex-col justify-between items-center overflow-hidden border ${todo.priority ? "border-amber-500" : "border-slate-400"} border-spacing-2 m-2 p-4 transition ease-in-out delay-50 ${todo.priority ? "shadow-amber-500" : "shadow-slate-400"} hover:shadow-xl duration-500`}>
+                    {todo.completed && (
+                        <div className="absolute inset-0 z-10 flex flex-col justify-center items-center bg-green-500 opacity-95">
+                            <p className="text-white text-xl">This task has been completed.</p>
+                            <button onClick={() => markComplete(todo.id)}>Undo</button>
+                        </div>
+                    )}
                     <div className="flex flex-row justify-between w-full">
                         <div className="flex flex-row items-center gap-1">
                             <FaTrash
@@ -178,7 +184,6 @@ console.log(todo.catagories)
                                 }}>Save & Close</button>
                         </div>
                     </div>
-
                 </dialog>
             )}
         </>
