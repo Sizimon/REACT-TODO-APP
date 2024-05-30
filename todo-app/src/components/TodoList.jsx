@@ -45,7 +45,7 @@ export default function TodoList({ todos, setTodos }) {
 
     const filteredTodos = todos.filter(todo => {
         // Check if the todo starts with the search term
-        let matchesSearchTerm = todo.task.toLowerCase().startsWith(searchTerm.toLowerCase());
+        let matchesSearchTerm = searchTerm === "" || todo.task.toLowerCase().startsWith(searchTerm.toLowerCase());
 
         // Check if the todo matches the checkbox conditions
         let matchesPriority = !priorityChecked || todo.priority;
@@ -109,8 +109,8 @@ export default function TodoList({ todos, setTodos }) {
                     <p className="text-center">To create a new task, please name your task and click the create key.<br /> After creating a task you will be able to write more about your task and customise it to your personal needs!</p>
                 </div>) : (
                 <div className="grid grid-cols-4">
-                    {searchTerm.length === 0 ? (
-                        todos.map((todo, index) => (
+                    {filteredTodos.length > 0 ? (
+                        filteredTodos.map((todo, index) => (
                             <TodoItem
                                 key={index}
                                 todo={todo}
@@ -123,26 +123,12 @@ export default function TodoList({ todos, setTodos }) {
                             />
                         ))
                     ) : (
-                        filteredTodos.length > 0 ? (
-                            filteredTodos.map((todo, index) => (
-                                <TodoItem
-                                    key={index}
-                                    todo={todo}
-                                    editTodo={editTodo}
-                                    editingItemId={editingItemId}
-                                    editDescription={editDescription}
-                                    deleteTodo={deleteTodo}
-                                    changePriority={changePriority}
-                                    markComplete={markComplete}
-                                />
-                            ))
-                        ) : (
-                            <div className="flex flex-col flex-grow justify-center items-center p-2 h-full overflow-auto col-span-4">
-                                <h1 className="text-4xl text-center font-teko">No Matching Task</h1>
-                                <p className="text-center">Please try again.</p>
-                            </div>
-                        )
-                    )}
+                        <div className="flex flex-col flex-grow justify-center items-center p-2 h-full overflow-auto col-span-4">
+                            <h1 className="text-4xl text-center font-teko">No Matching Task</h1>
+                            <p className="text-center">Please try again.</p>
+                        </div>
+                    )
+                    }
                 </div>
             )}
         </>
