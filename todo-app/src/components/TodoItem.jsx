@@ -48,76 +48,87 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
         setCategories(prevCategories => prevCategories.filter((_, i) => i !== index));
     }
 
-console.log(todo.catagories)
-
     return (
         <>
-                <div className={`relative border-box rounded-lg col-span-4 md:col-span-4 lg:col-span-2 flex flex-col justify-between items-center overflow-hidden border ${todo.priority ? "border-amber-500" : "border-blue-300"} border-spacing-2 m-2 p-4 transition ease-in-out delay-50 ${todo.priority ? "shadow-amber-500" : "shadow-blue-300"} hover:shadow-xl duration-500`}>
-                    {todo.completed && (
-                        <div className="absolute inset-0 z-10 flex flex-col justify-center items-center bg-green-500 opacity-95">
-                            <p className="text-white text-xl">This task has been completed.</p>
-                            <button onClick={() => markComplete(todo.id)}>Undo</button>
-                        </div>
-                    )}
-                    <div className="flex flex-row justify-between w-full">
-                        <div className="flex flex-row items-center gap-1">
-                            <FaTrash
-                                onClick={() => deleteTodo(todo.id)}
-                                className="text-red-500 hover:text-red-700 cursor-pointer transform hover:scale-110 transition ease-in-out duration-300"
-                            />
-                            <p className="text-sm text-slate-500">Delete</p>
-                        </div>
-                        <h2 className="uppercase font-teko font-medium text-4xl">{todo.task}</h2>
-                        <div className="flex flex-row items-center gap-1">
-                            <p className="text-sm text-slate-500">Prioritise</p>
-                            <FaThumbtack
-                                onClick={() => changePriority(todo.id)}
-                                className="text-amber-300 hover:text-amber-500 cursor-pointer transform hover:scale-110 transition ease-in-out duration-300"
-                            />
-                        </div>
+        {/* THIS IS THE TODO ITEM START */}
+            <div className={`relative bg-zinc-700 border-box rounded-lg col-span-4 md:col-span-4 lg:col-span-2 flex flex-col justify-between items-center overflow-hidden border ${todo.priority ? "border-amber-500" : "border-indigo-700"} border-spacing-2 m-2 p-4 transition ease-in-out delay-50 ${todo.priority ? "shadow-amber-500" : "shadow-indigo-700"} hover:shadow-xl duration-500`}>
+                {/* THIS IS THE OVERLAY IF AN ITEM IS MARKED AS COMPLETED */}
+                {todo.completed && (
+                    <div className="absolute inset-0 z-10 flex flex-col justify-center items-center bg-indigo-700 opacity-95">
+                        <p className="text-white text-xl">This task has been completed.</p>
+                        <button onClick={() => markComplete(todo.id)}>Undo</button>
                     </div>
-                    {todo.description ? (
-                        <>
-                            <p className="text-center p-4 rounded-md whitespace-pre-wrap break-words">{todo.description}</p>
-                            <ul className="flex flex-row list-none p-2 border border-white rounded-lg gap-2">
-                                {todo.catagories ? todo.catagories.map((category, index) => (
-                                    <li key={index} style={{ backgroundColor: category.color }} className="rounded-lg p-1 border border-white">
-                                        {category.name}
-                                    </li>
-                                )): null}
-                                {/* {categories.map((category, index) => (
-                                    <li key={index} style={{ backgroundColor: category.color }} className="rounded-lg p-1 border border-white">
-                                        {category.name}
-                                    </li>
-                                ))} */}
-                            </ul>
-                            <div className="flex flex-row">
-                                <button
-                                    onClick={() => editTodo(todo.id)}
-                                    className="bg-white uppercase text-slate-600 border border-slate-600 font-bold px-2 py-1 m-1 rounded-2xl hover:bg-slate-600 hover:text-white">
-                                    Edit Task
-                                </button>
-                                <button
-                                    onClick={() => markComplete(todo.id)}
-                                    className="bg-white uppercase text-green-400 border border-green-400 hover:bg-green-400 hover:text-white hover:border-white  font-bold px-2 py-1 m-1 rounded-2xl">
-                                    Mark Completed
-                                </button>
-                            </div>
-                        </>
-                    ) : (
-                        <>
-                            <p className="text-center p-4 whitespace-pre-wrap">Write a description about your task.</p>
-                            <div className="flex flex-row">
-                                <button
-                                    onClick={() => editTodo(todo.id)}
-                                    className="bg-white uppercase border border-blue-300 hover:bg-blue-300 hover:text-white text-blue-300 font-bold px-2 py-1 m-1 rounded-2xl">
-                                    Describe task
-                                </button>
-                            </div>
-                        </>
-                    )}
+                )}
+                {/* END */}
+                <div className="flex flex-row justify-between w-full">
+                {/* THESE ARE THE BUTTONS FOR DELETING OR MARKING PRIORITY */}
+                    <div className="flex flex-row items-center gap-1">
+                        <FaTrash
+                            onClick={() => deleteTodo(todo.id)}
+                            className="text-red-500 hover:text-red-700 cursor-pointer transform hover:scale-110 transition ease-in-out duration-300"
+                        />
+                        <p className="text-sm text-slate-500">Delete</p>
+                    </div>
+                    <h2 className="uppercase font-teko font-medium text-4xl text-white">{todo.task}</h2>
+                    <div className="flex flex-row items-center gap-1">
+                        <p className="text-sm text-slate-500">Prioritise</p>
+                        <FaThumbtack
+                            onClick={() => changePriority(todo.id)}
+                            className="text-amber-300 hover:text-amber-500 cursor-pointer transform hover:scale-110 transition ease-in-out duration-300"
+                        />
+                    </div>
+                {/* END */}
                 </div>
+                {todo.description ? (
+                    <>
+                        {/* THIS IS WHERE TODOITEM DATA IS DISPLAYED */}
+                        <p className="text-center p-4 rounded-md whitespace-pre-wrap break-words text-white">{todo.description}</p>
+                        <ul className="flex flex-row list-none p-2 text-white rounded-lg gap-2">
+                            {todo.catagories ? todo.catagories.map((category, index) => (
+                                <li key={index} style={{ backgroundColor: category.color }} className="rounded-lg p-1 border border-white">
+                                    {category.name}
+                                </li>
+                            )) : null}
+                        </ul>
+                        {/* END */}
+                        <div className="flex flex-row">
+                            {/* THESE ARE THE BUTTONS FOR EDITING OR MARKING AS COMPLETED */}
+                            <button
+                                onClick={() => editTodo(todo.id)}
+                                className="bg-transparent uppercase text-white border border-white font-bold px-2 py-1 m-1 rounded-2xl hover:bg-indigo-700 hover:text-white hover:border-indigo-700">
+                                Edit Task
+                            </button>
+                            <button
+                                onClick={() => markComplete(todo.id)}
+                                className="bg-transparent uppercase text-green-400 border border-green-400 hover:bg-green-400 hover:text-white hover:border-white  font-bold px-2 py-1 m-1 rounded-2xl">
+                                Mark Completed
+                            </button>
+                            {/* END */}
+                        </div>
+                    </>
+                ) : (
+
+                // THIS IS THE INITAL PLACEHOLDER FOR A TODOITEM BEFORE USER EDITTING
+
+                    <>
+                        <p className="text-center p-4 whitespace-pre-wrap text-white">Write a description about your task.</p>
+                        <div className="flex flex-row">
+                            <button
+                                onClick={() => editTodo(todo.id)}
+                                className="bg-transparent uppercase border border-white hover:bg-indigo-700 text-white font-bold px-2 py-1 m-1 rounded-2xl">
+                                Describe task
+                            </button>
+                        </div>
+                    </>
+                )}
+            </div>
+
+            {/* THIS IS THE TODO ITEM END */}
+
             {todo.isEditing && todo.id === editingItemId && (
+
+                // THIS IS THE DIALOG BOX START
+
                 <dialog
                     ref={dialogRef}
                     className="grid grid-cols-5 w-full md:w-10/12 lg:w-6/12 p-4 gap-4 rounded-lg border border-slate-900 bg-slate-200 text-black">
@@ -185,6 +196,9 @@ console.log(todo.catagories)
                         </div>
                     </div>
                 </dialog>
+
+                // THIS IS THE DIALOG BOX END
+
             )}
         </>
     );

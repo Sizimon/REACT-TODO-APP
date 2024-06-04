@@ -58,11 +58,12 @@ export default function TodoList({ todos, setTodos }) {
 
     return (
         <>
-            <div className="flex flex-row justify-evenly md:justify-center md:gap-2  items-center bg-blue-300 p-4 rounded-b-3xl">
+            {/* THIS IS THE FILTER "MENU" */}
+            <div className="flex flex-row justify-evenly md:justify-center md:gap-2  items-center bg-zinc-800 border-b border-zinc-400 p-4 rounded-b-3xl">
                 <input
                     type="text"
                     placeholder="Search tasks..."
-                    className="rounded-lg p-1"
+                    className="rounded-lg p-1 bg-zinc-700 text-white outline-none md:w-1/4"
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
                 <input
@@ -73,9 +74,9 @@ export default function TodoList({ todos, setTodos }) {
                     onChange={(e) => setPriorityChecked(e.target.checked)}
                     className="peer relative appearance-none 
                     w-4 h-4 border 
-                    rounded-full border-red-400 
+                    rounded-full border-indigo-700
                     cursor-pointer  
-                    checked:bg-amber-500"/>
+                    checked:bg-indigo-700"/>
                 <label htmlFor="priority" className="text-slate-600">Priority</label><br />
                 <input
                     type="checkbox"
@@ -85,9 +86,9 @@ export default function TodoList({ todos, setTodos }) {
                     onChange={(e) => setOverdueChecked(e.target.checked)}
                     className="peer relative appearance-none 
                     w-4 h-4 border 
-                    rounded-full border-red-400 
+                    rounded-full border-indigo-700
                     cursor-pointer  
-                    checked:bg-red-500" />
+                    checked:bg-indigo-700" />
                 <label htmlFor="overdue" className="text-slate-600">Overdue</label><br />
                 <input
                     type="checkbox"
@@ -97,16 +98,19 @@ export default function TodoList({ todos, setTodos }) {
                     onChange={(e) => setCompletedChecked(e.target.checked)}
                     className="peer relative appearance-none 
                     w-4 h-4 border 
-                    rounded-full border-red-400 
+                    rounded-full border-indigo-700 
                     cursor-pointer  
-                    checked:bg-green-500" />
+                    checked:bg-indigo-700" />
                 <label htmlFor="completed" className="text-slate-600">Completed</label>
                 {/* <span className="bg-white p-1 rounded-lg flex flex-row items-center gap-1">Filter <FaAngleDown /></span> */}
             </div>
+            {/* END */}
+
+            {/* THIS IS THE TODO LIST WHICH MAPS TODOITEMS */}
             {todos.length === 0 ? (
-                <div className="flex flex-col flex-grow justify-center items-center p-2 h-full overflow-auto bg-neutral-200">
-                    <h1 className="text-4xl text-center font-teko">No Task Set</h1>
-                    <p className="text-center">To create a new task, please name your task and click the create key.<br /> After creating a task you will be able to write more about your task and customise it to your personal needs!</p>
+                <div className="flex flex-col flex-grow justify-center items-center p-2 h-full overflow-auto">
+                    <h1 className="text-4xl text-center font-teko text-white">No Task Set</h1>
+                    <p className="text-center text-white">To create a new task, please name your task and click the create key.<br /> After creating a task you will be able to write more about your task and customise it to your personal needs!</p>
                 </div>) : (
                 <div className="grid grid-cols-4">
                     {filteredTodos.length > 0 ? (
@@ -124,13 +128,14 @@ export default function TodoList({ todos, setTodos }) {
                         ))
                     ) : (
                         <div className="flex flex-col flex-grow justify-center items-center p-2 h-full overflow-auto col-span-4">
-                            <h1 className="text-4xl text-center font-teko">No Matching Task</h1>
-                            <p className="text-center">Please try again.</p>
+                            <h1 className="text-4xl text-center font-teko text-white">No Matching Task</h1>
+                            <p className="text-center text-white">Please try again.</p>
                         </div>
                     )
                     }
                 </div>
             )}
+            {/* END */ }
         </>
     )
 }
