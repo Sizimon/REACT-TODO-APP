@@ -52,7 +52,7 @@ console.log(todo.catagories)
 
     return (
         <>
-                <div className={`relative border-box col-span-4 md:col-span-4 lg:col-span-2 flex flex-col justify-between items-center overflow-hidden border ${todo.priority ? "border-amber-500" : "border-slate-400"} border-spacing-2 m-2 p-4 transition ease-in-out delay-50 ${todo.priority ? "shadow-amber-500" : "shadow-slate-400"} hover:shadow-xl duration-500`}>
+                <div className={`relative border-box rounded-lg col-span-4 md:col-span-4 lg:col-span-2 flex flex-col justify-between items-center overflow-hidden border ${todo.priority ? "border-amber-500" : "border-blue-300"} border-spacing-2 m-2 p-4 transition ease-in-out delay-50 ${todo.priority ? "shadow-amber-500" : "shadow-blue-300"} hover:shadow-xl duration-500`}>
                     {todo.completed && (
                         <div className="absolute inset-0 z-10 flex flex-col justify-center items-center bg-green-500 opacity-95">
                             <p className="text-white text-xl">This task has been completed.</p>
@@ -110,7 +110,7 @@ console.log(todo.catagories)
                             <div className="flex flex-row">
                                 <button
                                     onClick={() => editTodo(todo.id)}
-                                    className="bg-slate-600 uppercase hover:bg-slate-900 text-white font-bold px-2 py-1 m-1 rounded-2xl">
+                                    className="bg-white uppercase border border-blue-300 hover:bg-blue-300 hover:text-white text-blue-300 font-bold px-2 py-1 m-1 rounded-2xl">
                                     Describe task
                                 </button>
                             </div>
