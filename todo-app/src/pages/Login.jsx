@@ -18,7 +18,7 @@ export default function Login() {
                         Login
                     </Link>
                     <br />
-                    <p>Don't have an account? <Link to="/" className="text-blue-500">Create one here.</Link></p>
+                    <p>Don't have an account? <Link to="/registration" className="text-blue-500">Create one here.</Link></p>
                     <p>Forgotten password? <Link to="/login" className="text-blue-500">Reset it here.</Link></p>
                 </form>
             </div>

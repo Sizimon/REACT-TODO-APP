@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { ColorPicker, useColor } from "react-color-palette";
 import "react-color-palette/css";
 import { FaThumbtack, FaTrash } from "react-icons/fa";
+import Lottie from "lottie-react";
+import Animations from "../Animations";
 
 export default function TodoItem({ todo, editTodo, editingItemId, editDescription, deleteTodo, changePriority, markComplete }) {
     const dialogRef = useRef(null);
@@ -9,6 +11,10 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
     const [color, setColor] = useColor("#ffffff");
     const [categoryName, setCategoryName] = useState('');
     const [categories, setCategories] = useState([]);
+
+    // Lottie Ref
+
+    const completedRef = useRef(null);
 
     useEffect(() => {
         if (todo.isEditing && todo.id === editingItemId) {
@@ -56,6 +62,12 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                 {todo.completed && (
                     <div className="absolute inset-0 z-10 flex flex-col justify-center items-center bg-indigo-700 opacity-95">
                         <p className="text-white text-xl">This task has been completed.</p>
+                        <Lottie 
+                        lottieRef={completedRef}
+                        animationData={Animations.completed} 
+                        loop={false} 
+                        onComplete={() => completedRef.current.destroy()}
+                        style={{ width: '100px'}}/>
                         <button onClick={() => markComplete(todo.id)}>Undo</button>
                     </div>
                 )}
