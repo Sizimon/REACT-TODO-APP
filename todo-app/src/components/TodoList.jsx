@@ -1,6 +1,8 @@
 import TodoItem from "./TodoItem"
 import { useState } from "react"
 import { FaAngleDown } from "react-icons/fa6"
+import Lottie from 'lottie-react'
+import Animations from '../Animations'
 
 export default function TodoList({ todos, setTodos }) {
     const [editingItemId, setEditingItemId] = useState(null)
@@ -110,6 +112,7 @@ export default function TodoList({ todos, setTodos }) {
             {todos.length === 0 ? (
                 <div className="flex flex-col flex-grow justify-center items-center p-2 h-full overflow-auto">
                     <h1 className="text-4xl text-center font-teko text-white">No Task Set</h1>
+                    <Lottie animationData={Animations.loading} className='w-2/6 h-2/6'/>
                     <p className="text-center text-white">To create a new task, please name your task and click the create key.<br /> After creating a task you will be able to write more about your task and customise it to your personal needs!</p>
                 </div>) : (
                 <div className="grid grid-cols-4">

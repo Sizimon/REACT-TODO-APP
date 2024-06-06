@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 export default function Login() {
     return (
         <div className="flex flex-col justify-center items-center h-screen w-screen bg-gradient-to-tr from-cyan-200 to-slate-600">
@@ -12,12 +14,12 @@ export default function Login() {
                         <label htmlFor="password">Password</label><br />
                         <input type="password" id="password" placeholder="Enter Password" className="w-2/4 rounded-lg p-2" />
                     </div>
-                    <a href="/taskmanager" className="bg-indigo-700 text-white p-2 m-2 rounded-lg">
+                    <Link to="/taskmanager" className="bg-indigo-700 text-white p-2 m-2 rounded-lg">
                         Login
-                    </a>
+                    </Link>
                     <br />
-                    <p>Don't have an account? <a href="/" className="text-blue-500">Create one here.</a></p>
-                    <p>Forgotten password? <a href="/login" className="text-blue-500">Reset it here.</a></p>
+                    <p>Don't have an account? <Link to="/" className="text-blue-500">Create one here.</Link></p>
+                    <p>Forgotten password? <Link to="/login" className="text-blue-500">Reset it here.</Link></p>
                 </form>
             </div>
         </div>
