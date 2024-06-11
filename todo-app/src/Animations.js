@@ -8,8 +8,7 @@ const Animations = {
     logo: logo,
     loading: loading,
     completed: completed,
-    error: error
-    
+    error: error,
 }
 
 export default Animations

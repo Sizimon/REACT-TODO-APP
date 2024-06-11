@@ -13,13 +13,17 @@ export default function Navigation({ createTodo }) {
 
     return (
         <nav className="flex flex-col justify-between items-center bg-zinc-800 border-b border-zinc-400 pb-6 px-6 w-full sticky z-10 top-0">
-            <div className='flex flex-row items-center w-full justify-between'>
+            <div className='flex flex-row items-center w-full justify-between mt-4'>
                 <p className='text-white'>ABOUT</p>
+                <p className='text-white'>LOGOUT</p>
+            </div>
+            <div className='flex flex-row items-center w-full justify-center'>
                 <div className='flex flex-row justify-center items-baseline'>
-                    <Lottie animationData={Animations.logo} style={{ width: '100px' }}/><br />
+                    <Lottie 
+                    animationData={Animations.logo} 
+                    className='w-1/6'/><br />
                     <h1 className='text-white text-3xl'>In<span className='text-amber-500'>Time</span>Tasks</h1>
                 </div>
-                <p className='text-white'>LOGOUT</p>
             </div>
             <div>
                 <div>
