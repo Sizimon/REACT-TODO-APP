@@ -1,5 +1,5 @@
 import TodoItem from "./TodoItem"
-import { useState, useRef } from "react"
+import { useState } from "react"
 import Lottie from 'lottie-react'
 import Animations from '../Animations'
 import MenuButton from "./MenuButton"
@@ -16,7 +16,6 @@ export default function TodoList({ todos, setTodos }) {
     // FILTER MENU STATE
 
     const [filterMenu, setFilterMenu] = useState(false)
-    const filterMenuRef = useRef(null)
 
     function editTodo(id) {
         setTodos(todos.map(todo => todo.id === id ? (
@@ -64,11 +63,20 @@ export default function TodoList({ todos, setTodos }) {
         return matchesSearchTerm && matchesPriority && matchesCompleted;
     });
 
+    console.log(filterMenu)
+
     return (
         <>
+            <div
+                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bottom-[-79px] p-2 z-10"
+                onClick={() => {
+                    setFilterMenu(!filterMenu)
+                }}>
+                <MenuButton />
+            </div>
             {/* THIS IS THE FILTER "MENU" */}
             {filterMenu ? (
-                <div className="flex flex-col justify-evenly md:justify-center md:gap-2 items-center bg-zinc-800 border-b border-zinc-400 p-4 rounded-b-3xl">
+                <div className="flex flex-col justify-evenly md:justify-center md:gap-2 items-center bg-zinc-800 border-b border-zinc-400 p-1 pt-5 rounded-b-3xl">
                     <div>
                         <input
                             type="text"
@@ -127,7 +135,6 @@ export default function TodoList({ todos, setTodos }) {
             {todos.length === 0 ? (
                 <div className="flex flex-col flex-grow justify-center items-center p-2 h-full overflow-auto">
                     <h1 className="text-4xl text-center font-teko text-white">No Task Set</h1>
-                    <MenuButton />
                     <Lottie animationData={Animations.loading} className='w-2/6 h-2/6' />
                     <p className="text-center text-white">To create a new task, please name your task and click the create key.<br /> After creating a task you will be able to write more about your task and customise it to your personal needs!</p>
                 </div>) : (
