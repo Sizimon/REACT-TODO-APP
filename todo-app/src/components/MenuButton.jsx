@@ -12,13 +12,13 @@ function MenuButton(){
         }}
         >
             <motion.button 
-                className="relative w-10 h-20"
+                className="relative w-10 h-10"
                 onClick={() => setActive(!active)}
                 animate={active ? "open" : "closed"}
                 initial={false}
             >
                 <motion.span
-                className="absolute h-1 w-10 bg-white"
+                className="absolute h-[2px] w-6 bg-white"
                 style={{
                     left: "50%",
                     top: "35%",
@@ -38,7 +38,7 @@ function MenuButton(){
                 }}
                 />
                 <motion.span
-                className="absolute h-1 w-10 bg-white"
+                className="absolute h-[2px] w-6 bg-white"
                 style={{
                     left: "50%",
                     top: "50%",
@@ -56,9 +56,9 @@ function MenuButton(){
                 }}
                 />
                 <motion.span
-                className="absolute h-1 w-5 bg-white"
+                className="absolute h-[2px] w-6 bg-white"
                 style={{
-                    left: "calc(50% + 10px)",
+                    left: "50%",
                     bottom: "35%",
                     x: "-50%",
                     y: "50%",
@@ -71,7 +71,7 @@ function MenuButton(){
                     },
                     closed: {
                         rotate: ["45deg", "0deg", "0deg"],
-                        left: "calc(50% + 10px)",
+                        left: "50%",
                         bottom: ["50%", "50%", "35%"]
                     },
                 }}

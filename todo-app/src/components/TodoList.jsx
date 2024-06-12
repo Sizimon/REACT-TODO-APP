@@ -2,9 +2,8 @@ import TodoItem from "./TodoItem"
 import { useState } from "react"
 import Lottie from 'lottie-react'
 import Animations from '../Animations'
-import MenuButton from "./MenuButton"
 
-export default function TodoList({ todos, setTodos }) {
+export default function TodoList({ todos, setTodos, filterMenu }) {
     const [editingItemId, setEditingItemId] = useState(null)
 
     // FILTER STATES
@@ -15,7 +14,6 @@ export default function TodoList({ todos, setTodos }) {
 
     // FILTER MENU STATE
 
-    const [filterMenu, setFilterMenu] = useState(false)
 
     function editTodo(id) {
         setTodos(todos.map(todo => todo.id === id ? (
@@ -63,17 +61,8 @@ export default function TodoList({ todos, setTodos }) {
         return matchesSearchTerm && matchesPriority && matchesCompleted;
     });
 
-    console.log(filterMenu)
-
     return (
         <>
-            <div
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bottom-[-79px] p-2 z-10"
-                onClick={() => {
-                    setFilterMenu(!filterMenu)
-                }}>
-                <MenuButton />
-            </div>
             {/* THIS IS THE FILTER "MENU" */}
             {filterMenu ? (
                 <div className="flex flex-col justify-evenly md:justify-center md:gap-2 items-center bg-zinc-800 border-b border-zinc-400 p-1 pt-5 rounded-b-3xl">

@@ -8,6 +8,7 @@ uuidv4();
 
 export default function TodoWrapper() {
     const [todos, setTodos] = useState([])
+    const [filterMenu, setFilterMenu] = useState(false)
 
     function createTodo(todo) {
         if (!todo) return alert('Please enter a task')
@@ -26,8 +27,15 @@ export default function TodoWrapper() {
 
     return (
         <div className="flex flex-col h-screen">
-            <Navigation createTodo={createTodo}/>
-            <TodoList todos={todos} setTodos={setTodos}/>
+            <Navigation 
+            createTodo={createTodo}
+            filterMenu={filterMenu}
+            setFilterMenu={setFilterMenu}
+            />
+            <TodoList 
+            todos={todos}
+            setTodos={setTodos}
+            filterMenu={filterMenu}/>
             <Footer todos={todos}/>
         </div>
     )

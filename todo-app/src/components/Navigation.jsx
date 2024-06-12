@@ -2,8 +2,9 @@ import React from 'react'
 import { useState } from 'react'
 import Lottie from 'lottie-react'
 import Animations from '../Animations'
+import MenuButton from './MenuButton'
 
-export default function Navigation({ createTodo }) {
+export default function Navigation({ createTodo, filterMenu, setFilterMenu}) {
     const [todo, setTodo] = useState('')
 
     function handleTodo() {
@@ -12,7 +13,7 @@ export default function Navigation({ createTodo }) {
     }
 
     return (
-        <nav className="flex flex-col justify-between items-center bg-zinc-800 border-b border-zinc-400 pb-6 px-6 w-full sticky z-10 top-0">
+        <nav className="flex flex-col justify-between items-center bg-zinc-800 border-b border-zinc-400 px-6 w-full sticky z-10 top-0">
             <div className='flex flex-row items-center w-full justify-between mt-4'>
                 <p className='text-white'>ABOUT</p>
                 <p className='text-white'>LOGOUT</p>
@@ -39,6 +40,15 @@ export default function Navigation({ createTodo }) {
                         onClick={handleTodo}
                     >Create</button>
                 </div>
+            </div>
+            <div>
+            <div
+                className="relative w-1/12 top-[20px]"
+                onClick={() => {
+                    setFilterMenu(!filterMenu)
+                }}>
+                <MenuButton />
+            </div>
             </div>
         </nav>
     )
