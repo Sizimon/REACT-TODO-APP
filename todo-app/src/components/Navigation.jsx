@@ -3,8 +3,9 @@ import { useState } from 'react'
 import Lottie from 'lottie-react'
 import Animations from '../Animations'
 import MenuButton from './MenuButton'
+import Button from './Button'
 
-export default function Navigation({ createTodo, filterMenu, setFilterMenu}) {
+export default function Navigation({ createTodo, filterMenu, setFilterMenu }) {
     const [todo, setTodo] = useState('')
 
     function handleTodo() {
@@ -20,9 +21,9 @@ export default function Navigation({ createTodo, filterMenu, setFilterMenu}) {
             </div>
             <div className='flex flex-row items-center w-full justify-center'>
                 <div className='flex flex-row justify-center items-baseline'>
-                    <Lottie 
-                    animationData={Animations.logo} 
-                    className='w-1/6'/><br />
+                    <Lottie
+                        animationData={Animations.logo}
+                        className='w-1/6' /><br />
                     <h1 className='text-white text-3xl'>In<span className='text-amber-500'>Time</span>Tasks</h1>
                 </div>
             </div>
@@ -35,20 +36,20 @@ export default function Navigation({ createTodo, filterMenu, setFilterMenu}) {
                         value={todo}
                         placeholder="Name your task!"
                         className="rounded-md px-2 py-1 mx-2 bg-zinc-700 text-white outline-none" />
-                    <button
-                        className="bg-transparent border border-white hover:border-indigo-700 hover:bg-indigo-700 text-white font-bold px-2 py-1 m-1 rounded-2xl"
-                        onClick={handleTodo}
-                    >Create</button>
+                    <Button 
+                    onClick={handleTodo} 
+                    text={'Create'}
+                    />
                 </div>
             </div>
             <div>
-            <div
-                className="relative w-1/12 top-[20px]"
-                onClick={() => {
-                    setFilterMenu(!filterMenu)
-                }}>
-                <MenuButton />
-            </div>
+                <div
+                    className="relative w-1/12 top-[20px]"
+                    onClick={() => {
+                        setFilterMenu(!filterMenu)
+                    }}>
+                    <MenuButton />
+                </div>
             </div>
         </nav>
     )

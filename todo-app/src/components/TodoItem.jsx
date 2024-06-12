@@ -4,6 +4,7 @@ import "react-color-palette/css";
 import { FaThumbtack, FaTrash } from "react-icons/fa";
 import Lottie from "lottie-react";
 import Animations from "../Animations";
+import Button from "./Button";
 
 export default function TodoItem({ todo, editTodo, editingItemId, editDescription, deleteTodo, changePriority, markComplete }) {
     const dialogRef = useRef(null);
@@ -105,14 +106,10 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                         {/* END */}
                         <div className="flex flex-row">
                             {/* THESE ARE THE BUTTONS FOR EDITING OR MARKING AS COMPLETED */}
-                            <button
-                                onClick={() => editTodo(todo.id)}
-                                className="bg-transparent uppercase text-white border border-white font-bold px-2 py-1 m-1 rounded-2xl hover:bg-indigo-700 hover:text-white hover:border-indigo-700">
-                                Edit Task
-                            </button>
+                            <Button onClick={() => editTodo(todo.id)} text="Edit Task" />
                             <button
                                 onClick={() => markComplete(todo.id)}
-                                className="bg-transparent uppercase text-green-400 border border-green-400 hover:bg-green-400 hover:text-white hover:border-white  font-bold px-2 py-1 m-1 rounded-2xl">
+                                className="bg-transparent uppercase text-green-400 border border-green-400 hover:bg-green-400 hover:text-white hover:border-white  font-bold px-2 py-1 m-1 rounded-lg">
                                 Mark Completed
                             </button>
                             {/* END */}
@@ -125,11 +122,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                     <>
                         <p className="text-center p-4 whitespace-pre-wrap text-white">Write a description about your task.</p>
                         <div className="flex flex-row">
-                            <button
-                                onClick={() => editTodo(todo.id)}
-                                className="bg-transparent uppercase border border-white hover:bg-indigo-700 text-white font-bold px-2 py-1 m-1 rounded-2xl">
-                                Describe task
-                            </button>
+                            <Button onClick={() => editTodo(todo.id)} text="Describe Task" />
                         </div>
                     </>
                 )}
@@ -143,7 +136,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
 
                 <dialog
                     ref={dialogRef}
-                    className="grid grid-cols-5 w-full md:w-10/12 lg:w-6/12 p-4 gap-4 rounded-lg border border-slate-900 bg-slate-200 text-black">
+                    className="grid grid-cols-5 w-full md:w-10/12 lg:w-6/12 p-4 gap-4 rounded-lg border border-zinc-400 bg-zinc-800 text-white">
                     <div className="col-span-5 text-center">
                         <h1 className="uppercase pb-6 text-2xl">{todo.task}</h1>
                     </div>
@@ -156,7 +149,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                             }}
                         >
                             <input
-                                className="bg-white rounded-lg text-black p-1"
+                                className="bg-zinc-700 rounded-lg text-white p-1  focus:outline-none"
                                 placeholder="Create a category."
                                 type="text"
                                 value={categoryName}
@@ -169,10 +162,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                                 onChange={setColor}
                                 hideInput={["rgb", "hsv"]}
                             />
-                            <button
-                                className="bg-white text-slate-900 rounded-lg p-2"
-                                type="submit"
-                            >Add as Category</button>
+                            <Button text="Add Category" type="submit"/>
                         </form>
                     </div>
                     <div className="col-span-5 md:col-span-3 text-center content-start">
@@ -182,7 +172,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                             placeholder="Describe your task."
                             onChange={e => setDescription(e.target.value)}
                             rows="12"
-                            className="bg-white border rounded-lg p-2 text-black resize-none border-none w-full"
+                            className="bg-zinc-700 border rounded-lg p-2 text-white resize-none border-none w-full"
                         />
                         <div className="flex flex-col justify-center my-2">
                             <ul className="flex flex-row list-none p-auto justify-center">
@@ -199,12 +189,10 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                             </ul>
                         </div>
                         <div className="flex flex-row justify-center gap-36 m-auto">
-                            <button
-                                className="bg-white text-slate-900 rounded-lg p-2"
-                                onClick={() => {
-                                    closeDialog(todo.id);
-                                    editDescription(todo.id, description, categories);
-                                }}>Save & Close</button>
+                            <Button onClick={() => {
+                                closeDialog(todo.id);
+                                editDescription(todo.id, description, categories);
+                                }} text="Save & Close" />
                         </div>
                     </div>
                 </dialog>

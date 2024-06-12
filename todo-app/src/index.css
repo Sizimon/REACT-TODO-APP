@@ -9,9 +9,9 @@ body {
     background-color: #27272a;
 }
 
-.rcp-root{--rcp-background-color: #FFFFFF;--rcp-field-input-color: #0f172a;--rcp-field-input-border-color: #e2e8f0;}
+.rcp-root{--rcp-background-color: #3f3f46;--rcp-field-input-color: #ffffff;--rcp-field-input-border-color: #a1a1aa;}
 
 dialog::backdrop {
-    background-color: #0f172a;
-    opacity: 0.98;
+    background-color: #3f3f46;
+    opacity: 0.90;
 }

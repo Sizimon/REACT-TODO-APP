@@ -144,6 +144,7 @@ export default function TodoList({ todos, setTodos, filterMenu }) {
                     ) : (
                         <div className="flex flex-col flex-grow justify-center items-center p-2 h-full overflow-auto col-span-4">
                             <h1 className="text-4xl text-center font-teko text-white">No Matching Task</h1>
+                            <Lottie animationData={Animations.loading} className='w-1/6 h-1/6' />
                             <p className="text-center text-white">Please try again.</p>
                         </div>
                     )
