@@ -44,7 +44,7 @@ export default function Navigation({ createTodo, filterMenu, setFilterMenu }) {
             </div>
             <div>
                 <div
-                    className="relative w-1/12 top-[20px]"
+                    className="relative w-1/12 top-[20px] z-10 cursor-pointer"
                     onClick={() => {
                         setFilterMenu(!filterMenu)
                     }}>
