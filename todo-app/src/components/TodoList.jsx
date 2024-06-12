@@ -12,9 +12,6 @@ export default function TodoList({ todos, setTodos, filterMenu }) {
     const [overdueChecked, setOverdueChecked] = useState(false);
     const [completedChecked, setCompletedChecked] = useState(false);
 
-    // FILTER MENU STATE
-
-
     function editTodo(id) {
         setTodos(todos.map(todo => todo.id === id ? (
             { ...todo, isEditing: true }
@@ -74,7 +71,7 @@ export default function TodoList({ todos, setTodos, filterMenu }) {
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
                     </div>
-                    <div className="flex flex-row gap-2 my-2">
+                    <div className="flex flex-row gap-2 my-2 items-center">
                         <input
                             type="checkbox"
                             name="priority"
@@ -83,9 +80,9 @@ export default function TodoList({ todos, setTodos, filterMenu }) {
                             onChange={(e) => setPriorityChecked(e.target.checked)}
                             className="peer relative appearance-none 
                         w-4 h-4 border 
-                        rounded-full border-indigo-700
+                        rounded-full border-amber-500
                         cursor-pointer  
-                        checked:bg-indigo-700"/>
+                        checked:bg-amber-500"/>
                         <label htmlFor="priority" className="text-slate-600">Priority</label><br />
                         <input
                             type="checkbox"
@@ -95,9 +92,9 @@ export default function TodoList({ todos, setTodos, filterMenu }) {
                             onChange={(e) => setOverdueChecked(e.target.checked)}
                             className="peer relative appearance-none 
                         w-4 h-4 border 
-                        rounded-full border-indigo-700
+                        rounded-full border-amber-500
                         cursor-pointer  
-                        checked:bg-indigo-700" />
+                        checked:bg-amber-500" />
                         <label htmlFor="overdue" className="text-slate-600">Overdue</label><br />
                         <input
                             type="checkbox"
@@ -107,9 +104,9 @@ export default function TodoList({ todos, setTodos, filterMenu }) {
                             onChange={(e) => setCompletedChecked(e.target.checked)}
                             className="peer relative appearance-none 
                         w-4 h-4 border 
-                        rounded-full border-indigo-700 
+                        rounded-full border-amber-500 
                         cursor-pointer  
-                        checked:bg-indigo-700" />
+                        checked:bg-amber-500" />
                         <label htmlFor="completed" className="text-slate-600">Completed</label>
                         {/* <span className="bg-white p-1 rounded-lg flex flex-row items-center gap-1">Filter <FaAngleDown /></span> */}
                     </div>

@@ -18,7 +18,7 @@ function MenuButton(){
                 initial={false}
             >
                 <motion.span
-                className="absolute h-[2px] w-6 bg-white"
+                className="absolute h-[2px] w-6 bg-amber-500"
                 style={{
                     left: "50%",
                     top: "35%",
@@ -56,7 +56,7 @@ function MenuButton(){
                 }}
                 />
                 <motion.span
-                className="absolute h-[2px] w-6 bg-white"
+                className="absolute h-[2px] w-6 bg-amber-500"
                 style={{
                     left: "50%",
                     bottom: "35%",
