@@ -1,29 +1,33 @@
 import { useEffect, useRef, useState } from "react";
 import { FaThumbtack, FaTrash } from "react-icons/fa";
 import Lottie from "lottie-react";
-import Animations from "../Animations";
+import Animations from "../../Animations";
 
-import Button from "./Button";
-import Dialog from "./Dialog";
-import Timer from "./Timer";
+import Button from "../AdditionalElementsFolder/Button";
+import Dialog from "./SubComponents/Dialog";
+import Timer from "./SubComponents/Timer";
+import TodoContent from "./SubComponents/TodoContent";
 
 export default function TodoItem({ todo, editTodo, editingItemId, editDescription, deleteTodo, changePriority, markComplete, createTimer }) {
+
+    // LIFTED DIALOG STATES
+
     const dialogRef = useRef(null);
     const [description, setDescription] = useState(todo.description);
     const [categoryName, setCategoryName] = useState('');
     const [categories, setCategories] = useState([]);
 
-    // Lottie Ref
+    // LOTTIE REF
 
     const completedRef = useRef(null);
 
-    // Timer Active?
+    // TIMER ACTIVE STATE
 
     const [timerActive, setTimerActive] = useState(false)
 
     // END
 
-    // Dialog functions
+    // DIALOG FUNCTIONS
 
     function displayDialog() {
         const dialog = dialogRef.current;
@@ -108,37 +112,30 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                 {todo.description ? (
                     <>
                         {/* THIS IS WHERE TODOITEM DATA IS DISPLAYED */}
-                        <p className="text-center p-4 rounded-md whitespace-pre-wrap break-words text-white">{todo.description}</p>
-                        <ul className="flex flex-row list-none p-2 text-white rounded-lg gap-2">
-                            {todo.catagories ? todo.catagories.map((category, index) => (
-                                <li key={index} style={{ backgroundColor: category.color }} className="rounded-lg p-1 border border-white">
-                                    {category.name}
-                                </li>
-                            )) : null}
-                        </ul>
+                        <TodoContent 
+                            todo={todo} 
+                        />
                         {/* END */}
 
                         {/* TIMER */}
-
                         <Timer
                             todo={todo}
                             timerActive={timerActive}
                             setTimerActive={setTimerActive}
                             createTimer={createTimer}
                         />
-
                         {/* END */}
 
+                        {/* THESE ARE THE BUTTONS FOR EDITING OR MARKING AS COMPLETED */}
                         <div className="flex flex-row">
-                            {/* THESE ARE THE BUTTONS FOR EDITING OR MARKING AS COMPLETED */}
                             <Button onClick={() => editTodo(todo.id)} text="Edit Task" />
                             <button
                                 onClick={() => markComplete(todo.id)}
                                 className="bg-transparent uppercase text-green-400 border border-green-400 hover:bg-green-400 hover:text-white hover:border-white  font-bold px-2 py-1 m-1 rounded-lg">
                                 Mark Completed
                             </button>
-                            {/* END */}
                         </div>
+                        {/* END */}
                     </>
                 ) : (
 
@@ -157,7 +154,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
 
             {todo.isEditing && todo.id === editingItemId && (
 
-                // THIS IS THE DIALOG BOX START
+            // THIS IS THE DIALOG BOX START
 
                 <Dialog
                     todo={todo}
@@ -172,11 +169,8 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                     editDescription={editDescription}
                     dialogRef={dialogRef}
                 />
-
-                // THIS IS THE DIALOG BOX END
-
+            // THIS IS THE DIALOG BOX END
             )}
         </>
     );
 }
-

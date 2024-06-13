@@ -1,7 +1,7 @@
-import TodoItem from "./TodoItem"
+import TodoItem from "../TodoItemFolder/TodoItem"
 import { useState } from "react"
 import Lottie from 'lottie-react'
-import Animations from '../Animations'
+import Animations from '../../Animations'
 
 export default function TodoList({ todos, setTodos, filterMenu }) {
     const [editingItemId, setEditingItemId] = useState(null)

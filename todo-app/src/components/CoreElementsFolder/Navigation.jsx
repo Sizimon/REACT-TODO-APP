@@ -1,9 +1,9 @@
 import React from 'react'
 import { useState } from 'react'
 import Lottie from 'lottie-react'
-import Animations from '../Animations'
-import MenuButton from './MenuButton'
-import Button from './Button'
+import Animations from '../../Animations'
+import MenuButton from '../AdditionalElementsFolder/MenuButton'
+import Button from '../AdditionalElementsFolder/Button'
 
 export default function Navigation({ createTodo, filterMenu, setFilterMenu }) {
     const [todo, setTodo] = useState('')

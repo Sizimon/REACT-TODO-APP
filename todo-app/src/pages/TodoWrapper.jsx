@@ -1,8 +1,8 @@
 import {useState} from "react"
-import Navigation from "../components/Navigation"
-import TodoList from "../components/TodoList";
+import Navigation from "../components/CoreElementsFolder/Navigation"
+import TodoList from "../components/CoreElementsFolder/TodoList";
 import { v4 as uuidv4 } from 'uuid' // Used as a unique identifier for each todo item
-import Footer from "../components/Footer";
+import Footer from "../components/CoreElementsFolder/Footer";
 uuidv4();
 
 

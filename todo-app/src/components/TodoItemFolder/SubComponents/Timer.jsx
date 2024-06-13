@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import { FaAngleDown } from 'react-icons/fa6'
-import Button from './Button'
+import Button from '../../AdditionalElementsFolder/Button'
 
 export default function Timer({ todo, createTimer, timerActive, setTimerActive}) {
 
     // Timer Parameters
-
     const timerHour = 3600;
     const timerDay = 86400;
     const timerWeek = 604800;
@@ -31,8 +30,6 @@ export default function Timer({ todo, createTimer, timerActive, setTimerActive})
 
         return () => clearInterval(timer);
     }, [timerActive, timeLeft]);
-
-    console.log(timeLeft)
 
     return (
         <div className="flex flex-col relative justify-center items-center">

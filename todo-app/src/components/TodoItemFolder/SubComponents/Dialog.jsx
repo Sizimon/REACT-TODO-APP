@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "./Button";
+import Button from "../../AdditionalElementsFolder/Button";
 import { ColorPicker, useColor } from "react-color-palette";
 import "react-color-palette/css";
 
