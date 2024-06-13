@@ -6,7 +6,7 @@ import Lottie from "lottie-react";
 import Animations from "../Animations";
 import Button from "./Button";
 
-export default function TodoItem({ todo, editTodo, editingItemId, editDescription, deleteTodo, changePriority, markComplete }) {
+export default function TodoItem({ todo, editTodo, editingItemId, editDescription, deleteTodo, changePriority, markComplete, createTimer }) {
     const dialogRef = useRef(null);
     const [description, setDescription] = useState(todo.description);
     const [color, setColor] = useColor("#ffffff");
@@ -16,6 +16,37 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
     // Lottie Ref
 
     const completedRef = useRef(null);
+
+    // Timer Parameters
+
+    const timerHour = 3600;
+    const timerDay = 86400;
+    const timerWeek = 604800;
+
+    // Timer 
+    const [timerActive, setTimerActive] = useState(false)
+    const [timerInput, setTimerInput] = useState(0)
+    const [timeLeft, setTimeLeft] = useState(0);
+    const [timerType, setTimerType] = useState(timerHour);
+
+    const selectedTimeType = timerType === timerHour ? "Hours" : timerType === timerDay ? "Days" : "Weeks";
+
+
+    useEffect(() => {
+        let timer = null; 
+
+        if (timerActive && timeLeft > 0) {
+            timer = setInterval(() => {
+                setTimeLeft(timeLeft => timeLeft - 1);
+            }, 1000);
+        } else {
+            clearInterval(timer);
+        }
+        
+        return () => clearInterval(timer);
+    }, [timerActive, timeLeft]);
+    
+    // END
 
     useEffect(() => {
         if (todo.isEditing && todo.id === editingItemId) {
@@ -55,6 +86,8 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
         setCategories(prevCategories => prevCategories.filter((_, i) => i !== index));
     }
 
+    console.log(timeLeft)
+
     return (
         <>
         {/* THIS IS THE TODO ITEM START */}
@@ -64,11 +97,12 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                     <div className="absolute inset-0 z-5 flex flex-col justify-center items-center bg-amber-500 opacity-95">
                         <p className="text-white text-xl">This task has been completed.</p>
                         <Lottie 
-                        lottieRef={completedRef}
-                        animationData={Animations.completed} 
-                        loop={false} 
-                        onComplete={() => completedRef.current.destroy()}
-                        style={{ width: '100px'}}/>
+                            lottieRef={completedRef}
+                            animationData={Animations.completed} 
+                            loop={false} 
+                            onComplete={() => completedRef.current.destroy()}
+                            style={{ width: '100px'}}
+                        />
                         <button onClick={() => markComplete(todo.id)}>Undo</button>
                     </div>
                 )}
@@ -104,6 +138,24 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                             )) : null}
                         </ul>
                         {/* END */}
+
+                        {/* TIMER */}
+                        <div className="flex flex-col justify-center items-center">
+                            <label className="text-white">Time to Complete in <span className="text-amber-500">{selectedTimeType}</span></label>
+                            <input 
+                            type="number" 
+                            className="w-10 bg-zinc-800 text-white rounded-lg text-center focus:outline-none border border-amber-500"
+                            onChange={(e) => setTimerInput(e.target.value)}
+                            value={timerInput} />
+                            <Button onClick={() => {
+                                setTimeLeft(timerType * timerInput)
+                                createTimer(todo.id, timeLeft)
+                                setTimerActive(true)
+                                setTimerInput(0)
+                                }} text="Set Timer" />
+                        </div>
+                        {/* END */}
+
                         <div className="flex flex-row">
                             {/* THESE ARE THE BUTTONS FOR EDITING OR MARKING AS COMPLETED */}
                             <Button onClick={() => editTodo(todo.id)} text="Edit Task" />

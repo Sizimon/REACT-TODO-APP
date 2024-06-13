@@ -45,6 +45,13 @@ export default function TodoList({ todos, setTodos, filterMenu }) {
         ));
     }
 
+    function createTimer(id, newTimer) {
+        setTodos(todos.map(todo => todo.id === id ? (
+            { ...todo, timer: newTimer }
+        ) : todo
+        ));
+    }
+
     const filteredTodos = todos.filter(todo => {
         // Check if the todo starts with the search term
         let matchesSearchTerm = searchTerm === "" || todo.task.toLowerCase().startsWith(searchTerm.toLowerCase());
@@ -136,6 +143,7 @@ export default function TodoList({ todos, setTodos, filterMenu }) {
                                 deleteTodo={deleteTodo}
                                 changePriority={changePriority}
                                 markComplete={markComplete}
+                                createTimer={createTimer}
                             />
                         ))
                     ) : (

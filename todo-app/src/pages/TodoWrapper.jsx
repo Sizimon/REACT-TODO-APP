@@ -20,7 +20,9 @@ export default function TodoWrapper() {
                 catagories: [], // This will be used to filter todos by catagory
                 completed: false, // This will be used to mark a task as completed or in progress
                 isEditing: false,
-                priority: false // This will be state to determine if a task is being edited
+                priority: false, // This will be state to determine if a task is being edited
+                timer: false,
+                overdue: false,
                 }])
             }
     }
