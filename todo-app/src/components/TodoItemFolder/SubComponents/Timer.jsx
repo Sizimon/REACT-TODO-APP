@@ -32,7 +32,7 @@ export default function Timer({ todo, createTimer, timerActive, setTimerActive})
     }, [timerActive, timeLeft]);
 
     return (
-        <div className="flex flex-col relative justify-center items-center">
+        <div className="flex flex-col relative justify-center items-center bg-zinc-800 rounded-lg p-2">
             {timerActive ? (
                 <div>PLACE HOLDER FOR COUNTDOWN</div>
             ) : (
@@ -44,7 +44,7 @@ export default function Timer({ todo, createTimer, timerActive, setTimerActive})
                         </span>
                     </label>
                     {timerType === timerHour && timerMenu ? (
-                        <ul className="absolute top-[4%] left-[100%] text-center bg-zinc-800 rounded-lg text-amber-500 w-[80px]">
+                        <ul className="absolute top-[4%] left-[100%] text-center bg-zinc-800 border border-amber-500 rounded-lg text-amber-500 w-[80px]">
                             <li
                                 className="cursor-pointer hover:bg-amber-500 hover:text-white w-full rounded-t-lg"
                                 onClick={() => {
@@ -63,7 +63,7 @@ export default function Timer({ todo, createTimer, timerActive, setTimerActive})
                             </li>
                         </ul>
                     ) : timerType === timerDay && timerMenu ? (
-                        <ul className="absolute top-[4%] left-[100%] text-center bg-zinc-800 rounded-lg text-amber-500 w-[80px]">
+                        <ul className="absolute top-[4%] left-[100%] text-center bg-zinc-800 border border-amber-500 rounded-lg text-amber-500 w-[80px]">
                             <li
                                 className="cursor-pointer hover:bg-amber-500 hover:text-white w-full rounded-t-lg"
                                 onClick={() => {
@@ -82,7 +82,7 @@ export default function Timer({ todo, createTimer, timerActive, setTimerActive})
                             </li>
                         </ul>
                     ) : timerType === timerWeek && timerMenu ? (
-                        <ul className="absolute top-[4%] left-[100%] text-center bg-zinc-800 rounded-lg text-amber-500 w-[80px]">
+                        <ul className="absolute top-[4%] left-[100%] text-center bg-zinc-800 border border-amber-500 rounded-lg text-amber-500 w-[80px]">
                             <li
                                 className="cursor-pointer hover:bg-amber-500 hover:text-white w-full rounded-t-lg"
                                 onClick={() => {
