@@ -28,6 +28,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
     const [timerInput, setTimerInput] = useState(0)
     const [timeLeft, setTimeLeft] = useState(0);
     const [timerType, setTimerType] = useState(timerHour);
+    const [timerMenu, setTimerMenu] = useState(false);
 
     const selectedTimeType = timerType === timerHour ? "Hours" : timerType === timerDay ? "Days" : "Weeks";
 
@@ -140,8 +141,24 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                         {/* END */}
 
                         {/* TIMER */}
-                        <div className="flex flex-col justify-center items-center">
-                            <label className="text-white">Time to Complete in <span className="text-amber-500">{selectedTimeType}</span></label>
+                        <div className="flex flex-col relative justify-center items-center">
+                            <label className="text-white">Time to Complete in <span className="text-amber-500" onClick={() => setTimerMenu(!timerMenu)}>{selectedTimeType}</span></label>
+                                {timerType === timerHour && timerMenu ? (
+                                    <ul className="absolute top-[28%] left-[72%] text-center bg-zinc-800 p-2 rounded-lg text-amber-500">
+                                        <li>Days</li>
+                                        <li>Weeks</li>
+                                    </ul>
+                                    ) : timerType === timerDay && timerMenu ? (
+                                    <ul>
+                                        <li>Hours</li>
+                                        <li>Weeks</li>
+                                    </ul>
+                                    ) : timerType === timerWeek && timerMenu ? (
+                                    <ul>
+                                        <li>Hours</li>
+                                        <li>Days</li>
+                                    </ul>
+                                    ) : null}
                             <input 
                             type="number" 
                             className="w-10 bg-zinc-800 text-white rounded-lg text-center focus:outline-none border border-amber-500"
