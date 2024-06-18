@@ -19,10 +19,10 @@ export default function TodoWrapper() {
                 description: '', // This will be used to describe the task
                 catagories: [], // This will be used to filter todos by catagory
                 completed: false, // This will be used to mark a task as completed or in progress
-                isEditing: false,
+                isEditing: false, // This will be state to determine if a task is being edited
                 priority: false, // This will be state to determine if a task is being edited
-                timer: false,
-                overdue: false,
+                timer: false, // This will be used to set a timer for a task
+                overdue: false, // This will check whether a timer has run out and a task is overdue
                 }])
             }
     }

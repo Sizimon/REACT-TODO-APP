@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const CountdownTimer = ({ timeLeft }) => {
+const CountdownTimer = ({todo, timeLeft, userActivatedTimer, changeOverdue }) => {
     const [time, setTime] = useState({
         days: 0,
         hours: 0,
@@ -10,6 +10,12 @@ const CountdownTimer = ({ timeLeft }) => {
 
     useEffect(() => {
         const intervalId = setInterval(() => {
+            if (timeLeft <= 0) {
+                if (userActivatedTimer) {
+                    changeOverdue(todo.id);
+                }
+                clearInterval(intervalId);
+            } else {
             const seconds = (timeLeft % 60).toString().padStart(2, '0');
             const minutes = Math.floor((timeLeft / 60) % 60).toString().padStart(2, '0');
             const hours = Math.floor((timeLeft / 3600) % 24).toString().padStart(2, '0');
@@ -23,6 +29,7 @@ const CountdownTimer = ({ timeLeft }) => {
             });
 
             timeLeft--;
+            }
         }, 1000);
 
         return () => clearInterval(intervalId);

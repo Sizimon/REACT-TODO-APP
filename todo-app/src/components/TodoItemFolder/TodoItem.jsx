@@ -8,7 +8,7 @@ import Dialog from "./SubComponents/Dialog";
 import Timer from "./SubComponents/Timer";
 import TodoContent from "./SubComponents/TodoContent";
 
-export default function TodoItem({ todo, editTodo, editingItemId, editDescription, editTitle, deleteTodo, changePriority, markComplete, createTimer }) {
+export default function TodoItem({ todo, editTodo, editingItemId, editDescription, editTitle, deleteTodo, changePriority, changeOverdue, markComplete, createTimer }) {
 
     // LIFTED DIALOG STATES
 
@@ -70,6 +70,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
     }
 
     // END
+    console.log(todo.overdue)
 
     return (
         <>
@@ -123,6 +124,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                             timerActive={timerActive}
                             setTimerActive={setTimerActive}
                             createTimer={createTimer}
+                            changeOverdue={changeOverdue}
                         />
                         {/* END */}
 

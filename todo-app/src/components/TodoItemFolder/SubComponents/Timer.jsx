@@ -3,9 +3,10 @@ import { FaAngleDown } from 'react-icons/fa6'
 import Button from '../../AdditionalElementsFolder/Button'
 import CountdownTimer from './CountdownTimer';
 
-export default function Timer({ todo, createTimer, timerActive, setTimerActive}) {
+export default function Timer({ todo, createTimer, timerActive, setTimerActive, changeOverdue}) {
 
     // Timer Parameters
+    const timerMinute = 60;
     const timerHour = 3600;
     const timerDay = 86400;
     const timerWeek = 604800;
@@ -13,10 +14,11 @@ export default function Timer({ todo, createTimer, timerActive, setTimerActive})
     // Timer 
     const [timerInput, setTimerInput] = useState(0)
     const [timeLeft, setTimeLeft] = useState(0);
-    const [timerType, setTimerType] = useState(timerHour);
+    const [timerType, setTimerType] = useState(timerMinute);
     const [timerMenu, setTimerMenu] = useState(false);
+    const [userActivatedTimer, setUserActivatedTimer] = useState(false);
 
-    const selectedTimeType = timerType === timerHour ? "Hours" : timerType === timerDay ? "Days" : "Weeks";
+    const selectedTimeType = timerType === timerMinute ? "Minutes" : timerType === timerHour ? "Hours" : timerType === timerDay ? "Days" : "Weeks";
 
     useEffect(() => {
         let timer = null;
@@ -32,12 +34,17 @@ export default function Timer({ todo, createTimer, timerActive, setTimerActive})
         return () => clearInterval(timer);
     }, [timerActive, timeLeft]);
 
+
     return (
         <div className="flex flex-col relative justify-center items-center bg-zinc-800 rounded-lg p-2">
             {timerActive ? (
                 <>
                     <p className='text-white p-1'>TASK TIMER</p>
-                    <CountdownTimer timeLeft={timeLeft} />
+                    <CountdownTimer 
+                    todo={todo}
+                    timeLeft={timeLeft} 
+                    userActivatedTimer={userActivatedTimer} 
+                    changeOverdue={changeOverdue} />
                 </>
             ) : (
                 <>
@@ -47,8 +54,43 @@ export default function Timer({ todo, createTimer, timerActive, setTimerActive})
                             <FaAngleDown />
                         </span>
                     </label>
-                    {timerType === timerHour && timerMenu ? (
+                    {timerType === timerMinute && timerMenu ? (
                         <ul className="absolute top-[4%] left-[100%] text-center bg-zinc-800 border border-amber-500 rounded-lg text-amber-500 w-[80px]">
+                            <li
+                                className="cursor-pointer hover:bg-amber-500 hover:text-white w-full rounded-t-lg"
+                                onClick={() => {
+                                    setTimerType(timerHour);
+                                    setTimerMenu(false);
+                                }}>
+                                Hours
+                            </li>
+                            <li
+                                className="cursor-pointer hover:bg-amber-500 hover:text-white w-full rounded-t-lg"
+                                onClick={() => {
+                                    setTimerType(timerDay);
+                                    setTimerMenu(false);
+                                }}>
+                                Days
+                            </li>
+                            <li
+                                className="cursor-pointer hover:bg-amber-500 hover:text-white w-full rounded-b-lg"
+                                onClick={() => {
+                                    setTimerType(timerWeek);
+                                    setTimerMenu(false);
+                                }}>
+                                Weeks
+                            </li>
+                        </ul>
+                    ) : timerType === timerHour && timerMenu ? (
+                        <ul className="absolute top-[4%] left-[100%] text-center bg-zinc-800 border border-amber-500 rounded-lg text-amber-500 w-[80px]">
+                            <li
+                                className="cursor-pointer hover:bg-amber-500 hover:text-white w-full rounded-t-lg"
+                                onClick={() => {
+                                    setTimerType(timerMinute);
+                                    setTimerMenu(false);
+                                }}>
+                                Minutes
+                            </li>
                             <li
                                 className="cursor-pointer hover:bg-amber-500 hover:text-white w-full rounded-t-lg"
                                 onClick={() => {
@@ -71,6 +113,14 @@ export default function Timer({ todo, createTimer, timerActive, setTimerActive})
                             <li
                                 className="cursor-pointer hover:bg-amber-500 hover:text-white w-full rounded-t-lg"
                                 onClick={() => {
+                                    setTimerType(timerMinute);
+                                    setTimerMenu(false);
+                                }}>
+                                Minutes
+                            </li>
+                            <li
+                                className="cursor-pointer hover:bg-amber-500 hover:text-white w-full rounded-t-lg"
+                                onClick={() => {
                                     setTimerType(timerHour);
                                     setTimerMenu(false);
                                 }}>
@@ -90,6 +140,14 @@ export default function Timer({ todo, createTimer, timerActive, setTimerActive})
                             <li
                                 className="cursor-pointer hover:bg-amber-500 hover:text-white w-full rounded-t-lg"
                                 onClick={() => {
+                                    setTimerType(timerMinute);
+                                    setTimerMenu(false);
+                                }}>
+                                Minutes
+                            </li>
+                            <li
+                                className="cursor-pointer hover:bg-amber-500 hover:text-white w-full rounded-t-lg"
+                                onClick={() => {
                                     setTimerType(timerHour);
                                     setTimerMenu(false);
                                 }}>
@@ -104,17 +162,19 @@ export default function Timer({ todo, createTimer, timerActive, setTimerActive})
                                 Days
                             </li>
                         </ul>
-                    ) : null}
+                    ): null}
 
                     <input
                         type="number"
                         className="w-10 bg-zinc-800 text-white rounded-lg text-center focus:outline-none border border-amber-500"
                         onChange={(e) => setTimerInput(e.target.value)}
                         value={timerInput} />
-                    <Button onClick={() => {
+                    <Button 
+                    onClick={() => {
                         setTimeLeft(timerType * timerInput);
                         createTimer(todo.id, timeLeft);
                         setTimerActive(true);
+                        setUserActivatedTimer(true);
                         setTimerInput(0)
                     }} text="Set Timer" />
                 </>

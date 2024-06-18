@@ -45,6 +45,13 @@ export default function TodoList({ todos, setTodos, filterMenu }) {
         ));
     }
 
+    function changeOverdue(id) {
+        setTodos(todos.map(todo => todo.id === id ? (
+            { ...todo, overdue: !todo.overdue }
+        ) : todo
+        ));
+    }
+
     function markComplete(id) {
         setTodos(todos.map(todo => todo.id === id ? (
             { ...todo, completed: !todo.completed }
@@ -152,6 +159,7 @@ export default function TodoList({ todos, setTodos, filterMenu }) {
                                 changePriority={changePriority}
                                 markComplete={markComplete}
                                 createTimer={createTimer}
+                                changeOverdue={changeOverdue}
                             />
                         ))
                     ) : (
