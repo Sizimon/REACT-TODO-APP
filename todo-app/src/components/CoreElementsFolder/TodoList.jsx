@@ -27,6 +27,13 @@ export default function TodoList({ todos, setTodos, filterMenu }) {
         ));
     }
 
+    function editTitle(id, newTitle) {
+        setTodos(todos.map(todo => todo.id === id ? (
+            {...todo, task: newTitle}
+        ) : todo
+        ));
+    }
+
     function deleteTodo(id) {
         setTodos(todos.filter(todo => todo.id !== id));
     }
@@ -140,6 +147,7 @@ export default function TodoList({ todos, setTodos, filterMenu }) {
                                 editTodo={editTodo}
                                 editingItemId={editingItemId}
                                 editDescription={editDescription}
+                                editTitle={editTitle}
                                 deleteTodo={deleteTodo}
                                 changePriority={changePriority}
                                 markComplete={markComplete}

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { FaAngleDown } from 'react-icons/fa6'
 import Button from '../../AdditionalElementsFolder/Button'
+import CountdownTimer from './CountdownTimer';
 
 export default function Timer({ todo, createTimer, timerActive, setTimerActive}) {
 
@@ -34,7 +35,10 @@ export default function Timer({ todo, createTimer, timerActive, setTimerActive})
     return (
         <div className="flex flex-col relative justify-center items-center bg-zinc-800 rounded-lg p-2">
             {timerActive ? (
-                <div>PLACE HOLDER FOR COUNTDOWN</div>
+                <>
+                    <p className='text-white p-1'>TASK TIMER</p>
+                    <CountdownTimer timeLeft={timeLeft} />
+                </>
             ) : (
                 <>
                     <label className="text-white flex flex-row gap-2">Time to Complete in

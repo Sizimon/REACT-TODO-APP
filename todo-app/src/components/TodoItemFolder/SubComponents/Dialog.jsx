@@ -1,18 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../../AdditionalElementsFolder/Button";
+
 import { ColorPicker, useColor } from "react-color-palette";
 import "react-color-palette/css";
 
+import { FaPencil } from "react-icons/fa6";
 
-export default function Dialog({ todo, description, setDescription, categories, categoryName, setCategoryName, removeCategory, submitCategory, closeDialog, editDescription, dialogRef}) {
+
+export default function Dialog({ todo, description, setDescription, categories, categoryName, setCategoryName, removeCategory, submitCategory, closeDialog, editDescription, editTitle, dialogRef }) {
     const [color, setColor] = useColor("#ffffff");
+    const [editingTitle, setEditingTitle] = useState(false);
+    const [title, setTitle] = useState(todo.task);
 
     return (
         <dialog
             ref={dialogRef}
             className="grid grid-cols-5 w-full md:w-10/12 lg:w-6/12 p-4 gap-4 rounded-lg border border-zinc-400 bg-zinc-800 text-white">
             <div className="col-span-5 text-center">
-                <h1 className="uppercase pb-6 text-2xl">{todo.task}</h1>
+                {editingTitle ? (
+                    <div className="flex flex-row justify-center items-center gap-2">
+                        <input
+                            type="text"
+                            className="bg-zinc-700 rounded-lg text-white uppercase focus:outline-none text-center text-2xl border-none w-full"
+                            value={title} 
+                            onChange={(e) => {setTitle(e.target.value)}}
+                            />
+                        <Button
+                            onClick={() => {
+                                editTitle(todo.id, title)
+                                setEditingTitle(false)
+                                }
+                            }
+                            text="Done" />
+                    </div>
+                ) : (
+                    <div className="flex flex-row justify-center items-center gap-2">
+                        <h1 className="uppercase text-2xl">{todo.task}</h1>
+                        <FaPencil
+                            className="text-zinc-400 cursor-pointer hover:text-white transition ease-in-out delay-50 duration-300"
+                            onClick={() => setEditingTitle(true)} />
+                    </div>
+                )}
             </div>
             <div className="col-span-5 md:col-span-2 text-center content-start">
                 <form

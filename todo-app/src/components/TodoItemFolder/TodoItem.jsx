@@ -8,7 +8,7 @@ import Dialog from "./SubComponents/Dialog";
 import Timer from "./SubComponents/Timer";
 import TodoContent from "./SubComponents/TodoContent";
 
-export default function TodoItem({ todo, editTodo, editingItemId, editDescription, deleteTodo, changePriority, markComplete, createTimer }) {
+export default function TodoItem({ todo, editTodo, editingItemId, editDescription, editTitle, deleteTodo, changePriority, markComplete, createTimer }) {
 
     // LIFTED DIALOG STATES
 
@@ -77,7 +77,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
             <div className={`relative bg-zinc-700 border-box rounded-lg col-span-4 md:col-span-4 lg:col-span-2 flex flex-col justify-between items-center overflow-hidden border ${todo.priority ? "border-amber-500" : "border-zinc-400"} border-spacing-2 m-2 p-4 transition ease-in-out delay-50 ${todo.priority ? "shadow-amber-500" : "shadow-indigo-700"} hover:shadow-xl duration-500`}>
                 {/* THIS IS THE OVERLAY IF AN ITEM IS MARKED AS COMPLETED */}
                 {todo.completed && (
-                    <div className="absolute inset-0 z-5 flex flex-col justify-center items-center bg-amber-500 opacity-95">
+                    <div className="absolute inset-0 z-10 flex flex-col justify-center items-center bg-amber-500 opacity-95">
                         <p className="text-white text-xl">This task has been completed.</p>
                         <Lottie
                             lottieRef={completedRef}
@@ -167,6 +167,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                     submitCategory={submitCategory}
                     closeDialog={closeDialog}
                     editDescription={editDescription}
+                    editTitle={editTitle}
                     dialogRef={dialogRef}
                 />
             // THIS IS THE DIALOG BOX END
