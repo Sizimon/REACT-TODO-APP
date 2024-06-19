@@ -21,9 +21,6 @@ export default function Navigation({ createTodo, filterMenu, setFilterMenu }) {
             </div>
             <div className='flex flex-row items-center w-full justify-center'>
                 <div className='flex flex-row justify-center items-baseline'>
-                    <Lottie
-                        animationData={Animations.logo}
-                        className='w-1/6' /><br />
                     <h1 className='text-white text-3xl'>In<span className='text-amber-500'>Time</span>Tasks</h1>
                 </div>
             </div>

@@ -16,6 +16,8 @@ const CountdownTimer = ({todo, timeLeft, userActivatedTimer, changeOverdue }) =>
                 }
                 clearInterval(intervalId);
             } else {
+            timeLeft--;
+            
             const seconds = (timeLeft % 60).toString().padStart(2, '0');
             const minutes = Math.floor((timeLeft / 60) % 60).toString().padStart(2, '0');
             const hours = Math.floor((timeLeft / 3600) % 24).toString().padStart(2, '0');
@@ -27,8 +29,6 @@ const CountdownTimer = ({todo, timeLeft, userActivatedTimer, changeOverdue }) =>
                 minutes,
                 seconds,
             });
-
-            timeLeft--;
             }
         }, 1000);
 

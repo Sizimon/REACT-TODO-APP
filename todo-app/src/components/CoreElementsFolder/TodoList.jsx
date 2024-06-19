@@ -72,18 +72,18 @@ export default function TodoList({ todos, setTodos, filterMenu }) {
 
         // Check if the todo matches the checkbox conditions
         let matchesPriority = !priorityChecked || todo.priority;
-        // let matchesOverdue = !overdueChecked || todo.overdue;
+        let matchesOverdue = !overdueChecked || todo.overdue;
         let matchesCompleted = !completedChecked || todo.completed;
 
         // Return true if all conditions are met
-        return matchesSearchTerm && matchesPriority && matchesCompleted;
+        return matchesSearchTerm && matchesPriority && matchesCompleted && matchesOverdue;
     });
 
     return (
         <>
             {/* THIS IS THE FILTER "MENU" */}
             {filterMenu ? (
-                <div className="flex flex-col justify-evenly md:justify-center md:gap-2 items-center bg-zinc-800 border-b border-zinc-400 p-1 pt-5 rounded-b-3xl">
+                <div className="flex flex-row justify-evenly md:justify-center md:gap-2 items-center bg-zinc-800 border-b border-zinc-400 p-1 pt-5 rounded-b-3xl">
                     <div>
                         <input
                             type="text"

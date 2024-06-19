@@ -70,15 +70,14 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
     }
 
     // END
-    console.log(todo.overdue)
 
     return (
         <>
             {/* THIS IS THE TODO ITEM START */}
-            <div className={`relative bg-zinc-700 border-box rounded-lg col-span-4 md:col-span-4 lg:col-span-2 flex flex-col justify-between items-center overflow-hidden border ${todo.priority ? "border-amber-500" : "border-zinc-400"} border-spacing-2 m-2 p-4 transition ease-in-out delay-50 ${todo.priority ? "shadow-amber-500" : "shadow-indigo-700"} hover:shadow-xl duration-500`}>
+            <div className={`relative bg-zinc-700 border-box rounded-lg col-span-4 md:col-span-4 lg:col-span-2 flex flex-col justify-between items-center overflow-auto border ${todo.priority ? "border-amber-500" : "border-zinc-400"} border-spacing-2 m-2 p-4 min-h-[300px] md:min-h-[500px] lg:min-h-[500px] transition ease-in-out delay-50 ${todo.priority ? "shadow-amber-500" : "shadow-indigo-700"} hover:shadow-xl duration-500`}>
                 {/* THIS IS THE OVERLAY IF AN ITEM IS MARKED AS COMPLETED */}
                 {todo.completed && (
-                    <div className="absolute inset-0 z-10 flex flex-col justify-center items-center bg-amber-500 opacity-95">
+                    <div className="absolute inset-0 z-5 flex flex-col justify-center items-center bg-amber-500 opacity-95">
                         <p className="text-white text-xl">This task has been completed.</p>
                         <Lottie
                             lottieRef={completedRef}
@@ -119,13 +118,19 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                         {/* END */}
 
                         {/* TIMER */}
-                        <Timer
+                        {todo.overdue ? (
+                            <div>
+                                <p>This task is overdue, make sure you catch up!</p>
+                            </div>
+                        ) : (
+                            <Timer
                             todo={todo}
                             timerActive={timerActive}
                             setTimerActive={setTimerActive}
                             createTimer={createTimer}
                             changeOverdue={changeOverdue}
                         />
+                        )}
                         {/* END */}
 
                         {/* THESE ARE THE BUTTONS FOR EDITING OR MARKING AS COMPLETED */}

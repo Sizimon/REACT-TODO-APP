@@ -28,16 +28,18 @@ export default function TodoWrapper() {
     }
 
     return (
-        <div className="flex flex-col h-screen">
+        <div className="flex flex-col min-h-screen">
             <Navigation 
             createTodo={createTodo}
             filterMenu={filterMenu}
             setFilterMenu={setFilterMenu}
             />
-            <TodoList 
-            todos={todos}
-            setTodos={setTodos}
-            filterMenu={filterMenu}/>
+            <div className="flex-grow">
+                <TodoList 
+                todos={todos}
+                setTodos={setTodos}
+                filterMenu={filterMenu}/>
+            </div>
             <Footer todos={todos}/>
         </div>
     )
