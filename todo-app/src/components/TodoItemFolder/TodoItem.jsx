@@ -2,10 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { FaThumbtack, FaTrash } from "react-icons/fa";
 import Lottie from "lottie-react";
 import Animations from "../../Animations";
-
 import Button from "../AdditionalElementsFolder/Button";
 import Dialog from "./SubComponents/Dialog";
-import Timer from "./SubComponents/Timer";
 import TodoContent from "./SubComponents/TodoContent";
 
 export default function TodoItem({ todo, editTodo, editingItemId, editDescription, editTitle, deleteTodo, changePriority, changeOverdue, markComplete, createTimer, updateTimer }) {
@@ -23,7 +21,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
 
     // TIMER ACTIVE STATE
 
-    const [timerActive, setTimerActive] = useState(false)
+    // const [timerActive, setTimerActive] = useState(false)
 
     // END
 
@@ -70,7 +68,6 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
     }
 
     // END
-    console.log(todo.timer)
 
     return (
         <>
@@ -119,7 +116,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                         {/* END */}
 
                         {/* TIMER */}
-                        {todo.overdue ? (
+                        {/* {todo.overdue ? (
                             <div>
                                 <p>This task is overdue, make sure you catch up!</p>
                             </div>
@@ -132,7 +129,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                             changeOverdue={changeOverdue}
                             updateTimer={updateTimer}
                         />
-                        )}
+                        )} */}
                         {/* END */}
 
                         {/* THESE ARE THE BUTTONS FOR EDITING OR MARKING AS COMPLETED */}

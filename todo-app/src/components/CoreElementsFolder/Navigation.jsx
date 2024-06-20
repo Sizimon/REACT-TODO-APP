@@ -1,17 +1,17 @@
 import React from 'react'
 import { useState } from 'react'
-import Lottie from 'lottie-react'
-import Animations from '../../Animations'
-import MenuButton from '../AdditionalElementsFolder/MenuButton'
 import Button from '../AdditionalElementsFolder/Button'
 
-export default function Navigation({ createTodo, filterMenu, setFilterMenu }) {
+export default function Navigation({ createTodo }) {
     const [todo, setTodo] = useState('')
+    const [selectedDate, setSelectedDate] = useState('')
 
     function handleTodo() {
-        createTodo(todo)
+        createTodo(todo, selectedDate)
         setTodo('')
     }
+
+    console.log(selectedDate)
 
     return (
         <nav className="flex flex-col justify-between items-center bg-zinc-800 border-b border-zinc-400 px-6 w-full sticky z-10 top-0">
@@ -32,20 +32,17 @@ export default function Navigation({ createTodo, filterMenu, setFilterMenu }) {
                         onChange={e => setTodo(e.target.value)}
                         value={todo}
                         placeholder="Name your task!"
-                        className="rounded-md px-2 py-1 mx-2 bg-zinc-700 text-white outline-none" />
-                    <Button 
-                    onClick={handleTodo} 
-                    text={'Create'}
+                        className="rounded-md px-2 py-1 mx-2 bg-zinc-700 text-white outline-none"
                     />
-                </div>
-            </div>
-            <div>
-                <div
-                    className="relative w-1/12 top-[20px] z-10 cursor-pointer"
-                    onClick={() => {
-                        setFilterMenu(!filterMenu)
-                    }}>
-                    <MenuButton />
+                    <input
+                        type="date"
+                        onChange={(e) => setSelectedDate(e.target.value)}
+                        value={selectedDate}
+                        className='bg-zinc-700 text-white rounded-lg p-1' />
+                    <Button
+                        onClick={handleTodo}
+                        text={'Create'}
+                    />
                 </div>
             </div>
         </nav>
