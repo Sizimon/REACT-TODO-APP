@@ -8,7 +8,6 @@ uuidv4();
 
 export default function TodoWrapper() {
     const [todos, setTodos] = useState([])
-    const [filterMenu, setFilterMenu] = useState(false)
 
     function createTodo(todo, date) {
         if (!todo && !date) return alert('Please enter a task / due date.')
@@ -21,6 +20,7 @@ export default function TodoWrapper() {
                 catagories: [], // This will be used to filter todos by catagory
                 completed: false, // This will be used to mark a task as completed or in progress
                 isEditing: false, // This will be state to determine if a task is being edited
+                isExpanded: false, // This will be state to determine if a task is expanded
                 priority: false, // This will be state to determine if a task is being edited
                 overdue: false, // This will check whether a timer has run out and a task is overdue
                 }])
@@ -31,14 +31,12 @@ export default function TodoWrapper() {
         <div className="flex flex-col min-h-screen">
             <Navigation 
             createTodo={createTodo}
-            filterMenu={filterMenu}
-            setFilterMenu={setFilterMenu}
             />
             <div className="flex flex-col flex-grow w-full">
                 <TodoList 
                 todos={todos}
                 setTodos={setTodos}
-                filterMenu={filterMenu}/>
+                />
             </div>
             <Footer todos={todos}/>
         </div>

@@ -1,16 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import { FaThumbtack, FaTrash } from "react-icons/fa";
+import { FaChevronRight } from "react-icons/fa6";
 import Lottie from "lottie-react";
 import Animations from "../../Animations";
 import Button from "../AdditionalElementsFolder/Button";
 import Dialog from "./SubComponents/Dialog";
 import TodoContent from "./SubComponents/TodoContent";
+import TodoItemExpanded from "./TodoItemExpanded";
 
-export default function TodoItem({ todo, editTodo, editingItemId, editDescription, editTitle, deleteTodo, changePriority, changeOverdue, markComplete, createTimer, updateTimer }) {
+export default function TodoItem({ todo, editTodo, editingItemId, editDescription, editTitle, deleteTodo, changePriority, changeOverdue, markComplete, expandTodo, expandedItemId }) {
 
     // LIFTED DIALOG STATES
 
     const dialogRef = useRef(null);
+    const expandedRef = useRef(null);
     const [description, setDescription] = useState(todo.description);
     const [categoryName, setCategoryName] = useState('');
     const [categories, setCategories] = useState([]);
@@ -19,13 +22,8 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
 
     const completedRef = useRef(null);
 
-    // TIMER ACTIVE STATE
 
-    // const [timerActive, setTimerActive] = useState(false)
-
-    // END
-
-    // DIALOG FUNCTIONS
+    // EDITTING DIALOG FUNCTIONS
 
     function displayDialog() {
         const dialog = dialogRef.current;
@@ -69,10 +67,35 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
 
     // END
 
+    // EXPAND DIALOG FUNCTIONS
+
+    function displayExpanded() {
+        const dialog = expandedRef.current;
+        dialog.showModal();
+    }
+
+    function closeExpanded(id) {
+        if (todo.id === id) {
+            const updatedTask = { ...todo, isExpanded: false, };
+            expandTodo(updatedTask);
+
+            const dialog = expandedRef.current;
+            if (dialog) {
+                dialog.close();
+            }
+        }
+    }
+
+    useEffect(() => {
+        if (todo.isExpanded && todo.id === expandedItemId) {
+            displayDialog();
+        }
+    }, [todo.isExpanded, todo.id, expandedItemId]);
+
     return (
         <>
             {/* THIS IS THE TODO ITEM START */}
-            <div className={`relative bg-zinc-700 border-box rounded-lg col-span-4 md:col-span-4 lg:col-span-2 flex flex-col justify-between items-center overflow-auto border ${todo.priority ? "border-amber-500" : "border-zinc-400"} border-spacing-2 m-2 p-4 min-h-[300px] md:min-h-[500px] lg:min-h-[500px] transition ease-in-out delay-50 ${todo.priority ? "shadow-amber-500" : "shadow-indigo-700"} hover:shadow-xl duration-500`}>
+            <div className={`relative bg-zinc-700 border-box w-full rounded-lg flex flex-col justify-center items-center overflow-auto border ${todo.priority ? "border-amber-500" : "border-zinc-400"} border-spacing-2 m-2 p-4 transition ease-in-out delay-50 ${todo.priority ? "shadow-amber-500" : "shadow-indigo-700"} hover:shadow-xl duration-500`}>
                 {/* THIS IS THE OVERLAY IF AN ITEM IS MARKED AS COMPLETED */}
                 {todo.completed && (
                     <div className="absolute inset-0 z-[5] flex flex-col justify-center items-center bg-amber-500 opacity-95">
@@ -90,63 +113,56 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                 {/* END */}
                 <div className="flex flex-row justify-between w-full">
                     {/* THESE ARE THE BUTTONS FOR DELETING OR MARKING PRIORITY */}
-                    <div className="flex flex-row items-center gap-1">
+                    {/* <div className="flex flex-row items-center gap-1">
                         <FaTrash
                             onClick={() => deleteTodo(todo.id)}
                             className="text-red-500 hover:text-red-700 cursor-pointer transform hover:scale-110 transition ease-in-out duration-300"
                         />
                         <p className="text-sm text-slate-500">Delete</p>
-                    </div>
-                    <h2 className="uppercase font-teko font-medium text-4xl text-white">{todo.task}</h2>
-                    <div className="flex flex-row items-center gap-1">
+                    </div> */}
+                    <h1 className="uppercase font-teko font-medium text-xl text-white">{todo.task}</h1>
+                    {/* <div className="flex flex-row items-center gap-1">
                         <p className="text-sm text-slate-500">Prioritise</p>
                         <FaThumbtack
                             onClick={() => changePriority(todo.id)}
                             className="text-amber-300 hover:text-amber-500 cursor-pointer transform hover:scale-110 transition ease-in-out duration-300"
                         />
-                    </div>
+                    </div> */}
                     {/* END */}
                 </div>
                 {todo.description ? (
                     <>
                         {/* THIS IS WHERE TODOITEM DATA IS DISPLAYED */}
+                        <div className="flex flex-col w-full justify-start items-start">
                         <TodoContent 
                             todo={todo} 
                         />
-                        {/* END */}
-
-                        {/* TIMER */}
-                        {/* {todo.overdue ? (
-                            <div>
-                                <p>This task is overdue, make sure you catch up!</p>
-                            </div>
-                        ) : (
-                            <Timer
-                            todo={todo}
-                            timerActive={timerActive}
-                            setTimerActive={setTimerActive}
-                            createTimer={createTimer}
-                            changeOverdue={changeOverdue}
-                            updateTimer={updateTimer}
-                        />
-                        )} */}
+                        </div>
                         {/* END */}
 
                         {/* THESE ARE THE BUTTONS FOR EDITING OR MARKING AS COMPLETED */}
                         <div className="flex flex-row">
-                            <Button onClick={() => editTodo(todo.id)} text="Edit Task" />
+                            <button 
+                            onClick={() => {
+                                expandTodo(todo.id);
+                                displayExpanded();
+                            }}
+                            className="flex flex-row justify-center items-center text-sm text-amber-500">
+                                Expand
+                                <FaChevronRight />
+                            </button>
+                            {/* <Button onClick={() => editTodo(todo.id)} text="Edit Task" />
                             <button
                                 onClick={() => markComplete(todo.id)}
                                 className="bg-transparent uppercase text-green-400 border border-green-400 hover:bg-green-400 hover:text-white hover:border-white  font-bold px-2 py-1 m-1 rounded-lg">
                                 Mark Completed
-                            </button>
+                            </button> */}
                         </div>
                         {/* END */}
                     </>
                 ) : (
 
                     // THIS IS THE INITAL PLACEHOLDER FOR A TODOITEM BEFORE USER EDITTING
-
                     <>
                         <p className="text-center p-4 whitespace-pre-wrap text-white">Write a description about your task.</p>
                         <div className="flex flex-row">
@@ -178,6 +194,14 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                 />
             // THIS IS THE DIALOG BOX END
             )}
+
+            {todo.isExpanded ? (
+                <TodoItemExpanded 
+                expandedRef={expandedRef}
+                todo={todo}
+                closeExpanded={closeExpanded}
+                />
+            ) : (null)}
         </>
     );
 }
