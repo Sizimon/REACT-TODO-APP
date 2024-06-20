@@ -12,6 +12,8 @@ export default function TodoList({ todos, setTodos, filterMenu }) {
     const [overdueChecked, setOverdueChecked] = useState(false);
     const [completedChecked, setCompletedChecked] = useState(false);
 
+    // EDITING TODO
+
     function editTodo(id) {
         setTodos(todos.map(todo => todo.id === id ? (
             { ...todo, isEditing: true }
@@ -19,6 +21,10 @@ export default function TodoList({ todos, setTodos, filterMenu }) {
         ));
         setEditingItemId(id)
     }
+
+    // END
+
+    // EDIT TITLE / DESCRIPTION / CATEGORIES
 
     function editDescription(id, newDescription, newCategories) {
         setTodos(todos.map(todo => todo.id === id ? (
@@ -34,6 +40,10 @@ export default function TodoList({ todos, setTodos, filterMenu }) {
         ));
     }
 
+    // END
+
+    // DELETE / PRIORITY
+
     function deleteTodo(id) {
         setTodos(todos.filter(todo => todo.id !== id));
     }
@@ -44,6 +54,10 @@ export default function TodoList({ todos, setTodos, filterMenu }) {
         ) : todo
         ));
     }
+
+    // END
+
+    // SET OVERDUE / COMPLETE
 
     function changeOverdue(id) {
         setTodos(todos.map(todo => todo.id === id ? (
@@ -59,12 +73,22 @@ export default function TodoList({ todos, setTodos, filterMenu }) {
         ));
     }
 
+    // END
+
+    // TIMER FUNCTIONS
+
     function createTimer(id, newTimer) {
         setTodos(todos.map(todo => todo.id === id ? (
             { ...todo, timer: newTimer }
         ) : todo
         ));
     }
+
+    function updateTimer(id, timeLeft) {
+        setTodos(todos => todos.map(todo => todo.id === id ? { ...todo, timer: timeLeft } : todo));
+    }
+
+    // END
 
     const filteredTodos = todos.filter(todo => {
         // Check if the todo starts with the search term
@@ -160,6 +184,7 @@ export default function TodoList({ todos, setTodos, filterMenu }) {
                                 markComplete={markComplete}
                                 createTimer={createTimer}
                                 changeOverdue={changeOverdue}
+                                updateTimer={updateTimer}
                             />
                         ))
                     ) : (

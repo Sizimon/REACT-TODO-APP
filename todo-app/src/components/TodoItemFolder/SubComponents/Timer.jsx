@@ -3,7 +3,7 @@ import { FaAngleDown } from 'react-icons/fa6'
 import Button from '../../AdditionalElementsFolder/Button'
 import CountdownTimer from './CountdownTimer';
 
-export default function Timer({ todo, createTimer, timerActive, setTimerActive, changeOverdue}) {
+export default function Timer({ todo, createTimer, timerActive, setTimerActive, changeOverdue, updateTimer}) {
 
     // Timer Parameters
     const timerMinute = 60;
@@ -26,6 +26,7 @@ export default function Timer({ todo, createTimer, timerActive, setTimerActive, 
         if (timerActive && timeLeft > 0) {
             timer = setInterval(() => {
                 setTimeLeft(timeLeft => timeLeft - 1);
+                updateTimer(todo.id, timeLeft - 1);
             }, 1000);
         } else {
             clearInterval(timer);
@@ -33,7 +34,6 @@ export default function Timer({ todo, createTimer, timerActive, setTimerActive, 
 
         return () => clearInterval(timer);
     }, [timerActive, timeLeft]);
-
 
     return (
         <div className="flex flex-col relative justify-center items-center bg-zinc-800 rounded-lg p-2">
