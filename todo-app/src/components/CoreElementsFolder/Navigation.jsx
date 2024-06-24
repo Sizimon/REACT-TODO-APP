@@ -4,7 +4,7 @@ import Button from '../AdditionalElementsFolder/Button'
 
 export default function Navigation({ createTodo }) {
     const [todo, setTodo] = useState('')
-    const [selectedDate, setSelectedDate] = useState('')
+    const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0])
 
     function handleTodo() {
         createTodo(todo, selectedDate)
@@ -35,10 +35,11 @@ export default function Navigation({ createTodo }) {
                         className="rounded-md px-2 py-1 mx-2 bg-zinc-700 text-white outline-none"
                     />
                     <input
+                        required
                         type="date"
                         onChange={(e) => setSelectedDate(e.target.value)}
                         value={selectedDate}
-                        className='bg-zinc-700 text-white rounded-lg p-1' />
+                        className='bg-zinc-700 text-white rounded-lg p-1 focus:outline-none dark:[color-scheme:dark]' />
                     <Button
                         onClick={handleTodo}
                         text={'Create'}
