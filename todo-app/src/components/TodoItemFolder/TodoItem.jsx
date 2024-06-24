@@ -88,14 +88,14 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
 
     useEffect(() => {
         if (todo.isExpanded && todo.id === expandedItemId) {
-            displayDialog();
+            displayExpanded();
         }
     }, [todo.isExpanded, todo.id, expandedItemId]);
 
     return (
         <>
             {/* THIS IS THE TODO ITEM START */}
-            <div className={`relative bg-zinc-700 border-box w-full rounded-lg flex flex-col justify-center items-center overflow-auto border ${todo.priority ? "border-amber-500" : "border-zinc-400"} border-spacing-2 m-2 p-4 transition ease-in-out delay-50 ${todo.priority ? "shadow-amber-500" : "shadow-indigo-700"} hover:shadow-xl duration-500`}>
+            <div className={`relative bg-zinc-700 border-box w-[90%] rounded-lg flex flex-col justify-center items-center overflow-auto border ${todo.priority ? "border-amber-500" : "border-zinc-400"} border-spacing-2 m-1 p-1 transition ease-in-out delay-50 ${todo.priority ? "shadow-amber-500" : "shadow-indigo-700"} hover:shadow-xl duration-500`}>
                 {/* THIS IS THE OVERLAY IF AN ITEM IS MARKED AS COMPLETED */}
                 {todo.completed && (
                     <div className="absolute inset-0 z-[5] flex flex-col justify-center items-center bg-amber-500 opacity-95">
@@ -133,7 +133,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                 {todo.description ? (
                     <>
                         {/* THIS IS WHERE TODOITEM DATA IS DISPLAYED */}
-                        <div className="flex flex-col w-full justify-start items-start">
+                        <div className="flex flex-col w-full justify-start items-start mb-2">
                         <TodoContent 
                             todo={todo} 
                         />
@@ -141,13 +141,12 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                         {/* END */}
 
                         {/* THESE ARE THE BUTTONS FOR EDITING OR MARKING AS COMPLETED */}
-                        <div className="flex flex-row">
+                        <div className="flex flex-row w-full">
                             <button 
                             onClick={() => {
                                 expandTodo(todo.id);
-                                displayExpanded();
                             }}
-                            className="flex flex-row justify-center items-center text-sm text-amber-500">
+                            className="flex flex-row justify-start items-center text-xs text-amber-500">
                                 Expand
                                 <FaChevronRight />
                             </button>
@@ -176,7 +175,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
 
             {todo.isEditing && todo.id === editingItemId && (
 
-            // THIS IS THE DIALOG BOX START
+            // THIS IS THE USER INITIALIZATION OF TASK BOX START
 
                 <Dialog
                     todo={todo}
@@ -192,16 +191,30 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                     editTitle={editTitle}
                     dialogRef={dialogRef}
                 />
-            // THIS IS THE DIALOG BOX END
+            // END
             )}
 
-            {todo.isExpanded ? (
+            {todo.isExpanded && todo.id === expandedItemId && (
                 <TodoItemExpanded 
-                expandedRef={expandedRef}
-                todo={todo}
-                closeExpanded={closeExpanded}
+                    expandedRef={expandedRef}
+                    dialogRef={dialogRef}
+                    todo={todo}
+                    closeExpanded={closeExpanded}
+                    displayDialog={displayDialog}
+                    description={description}
+                    setDescription={setDescription}
+                    categories={categories}
+                    categoryName={categoryName}
+                    setCategoryName={setCategoryName}
+                    removeCategory={removeCategory}
+                    submitCategory={submitCategory}
+                    closeDialog={closeDialog}
+                    editDescription={editDescription}
+                    editTitle={editTitle}
+                    editingItemId={editingItemId}
+                    editTodo={editTodo}
                 />
-            ) : (null)}
+            )}
         </>
     );
 }

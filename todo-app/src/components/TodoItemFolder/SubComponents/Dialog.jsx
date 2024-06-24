@@ -83,7 +83,7 @@ export default function Dialog({ todo, description, setDescription, categories, 
                                 key={index}
                                 style={{ backgroundColor: category.color }}
                                 onClick={() => removeCategory(index)}
-                                className="rounded-lg p-1 mx-1 border border-white cursor-pointer"
+                                className="rounded-lg p-1 mx-1 cursor-pointer"
                             >
                                 {category.name}
                             </li>

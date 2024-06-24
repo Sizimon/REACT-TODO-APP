@@ -17,7 +17,7 @@ export default function TodoWrapper() {
                 task: todo, // This will be used to display the users input task
                 description: '', // This will be used to describe the task
                 date: date, // This will be used to set a due date for the task
-                catagories: [], // This will be used to filter todos by catagory
+                categories: [], // This will be used to filter todos by catagory
                 completed: false, // This will be used to mark a task as completed or in progress
                 isEditing: false, // This will be state to determine if a task is being edited
                 isExpanded: false, // This will be state to determine if a task is expanded

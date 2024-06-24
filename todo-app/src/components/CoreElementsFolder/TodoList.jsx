@@ -24,7 +24,7 @@ export default function TodoList({ todos, setTodos }) {
     // EXPAND TODO
     function expandTodo(id) {
         setTodos(todos.map(todo => todo.id === id ? (
-            { ...todo, isExpanded: !todo.isExpanded }
+            { ...todo, isExpanded: true }
         ) : todo
         ));
         setExpandedItemId(id)
@@ -47,7 +47,7 @@ export default function TodoList({ todos, setTodos }) {
 
     function editDescription(id, newDescription, newCategories) {
         setTodos(todos.map(todo => todo.id === id ? (
-            { ...todo, description: newDescription, catagories: newCategories }
+            { ...todo, description: newDescription, categories: newCategories }
         ) : todo
         ));
     }
@@ -91,8 +91,6 @@ export default function TodoList({ todos, setTodos }) {
         ) : todo
         ));
     }
-
-    console.log(todos)
 
     return (
         <>

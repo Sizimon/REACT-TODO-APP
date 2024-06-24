@@ -11,8 +11,6 @@ export default function Navigation({ createTodo }) {
         setTodo('')
     }
 
-    console.log(selectedDate)
-
     return (
         <nav className="flex flex-col justify-between items-center bg-zinc-800 border-b border-zinc-400 px-6 w-full sticky z-10 top-0">
             <div className='flex flex-row items-center w-full justify-between mt-4'>
