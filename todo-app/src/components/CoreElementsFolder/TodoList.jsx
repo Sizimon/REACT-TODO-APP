@@ -101,7 +101,7 @@ export default function TodoList({ todos, setTodos }) {
                     newDate.setDate(prevDate.getDate() - 7);
                     return newDate;
                 })}
-                className="text-white uppercase flex flex-row items-center gap-1 transition ease-in-out duration-300 hover:text-amber-500"
+                className="text-white uppercase flex flex-row items-center gap-1 transition ease-in-out duration-300 hover:text-amber-500 font-lato"
                 >
                     <FaChevronLeft />
                     Previous Week
@@ -112,7 +112,7 @@ export default function TodoList({ todos, setTodos }) {
                     newDate.setDate(prevDate.getDate() + 7);
                     return newDate;
                 })}
-                className="text-white uppercase flex flex-row items-center gap-1 transition ease-in-out duration-300 hover:text-amber-500"
+                className="text-white uppercase flex flex-row items-center gap-1 transition ease-in-out duration-300 hover:text-amber-500 font-lato"
                 >
                     Next Week
                     <FaChevronRight />
@@ -121,7 +121,7 @@ export default function TodoList({ todos, setTodos }) {
             <div className="flex overflow-x-scroll h-full justify-start flex-grow items-start">
                 {weekDates.map((date, index) => (
                     <div key={index} className="flex flex-col justify-start items-center text-white min-w-[20%] min-h-[600px] flex-grow border border-white">
-                        <h2 className="uppercase py-4 border-b border-zinc-400">{date.toDateString()}</h2>
+                        <h2 className="uppercase py-4 border-b border-zinc-400 font-lato">{date.toDateString()}</h2>
                         {todos.filter(todo => new Date(todo.date).toDateString() === date.toDateString()).map(todos => (
                             <TodoItem 
                                 key={todos.id}

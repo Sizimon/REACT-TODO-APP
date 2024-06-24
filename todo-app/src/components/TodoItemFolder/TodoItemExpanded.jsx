@@ -12,7 +12,7 @@ export default function TodoItemExpanded({ expandedRef, todo, closeExpanded, des
                 <div className='justify-self-center col-span-6'>
                     <h1 className='uppercase text-2xl pb-4 items-center'>{todo.task}</h1>
                 </div>
-                <div className='border border-white p-2 m-2 rounded-lg col-span-6 w-full justify-self-center'>
+                <div className='border border-amber-500 p-2 m-2 rounded-lg col-span-6 w-full justify-self-center'>
                     <p className='text-left rounded-md whitespace-pre-wrap break-words text-white text-md'>{todo.description}</p>
                 </div>
                 <div className='flex flex-row p-2 rounded-lg m-2 col-start-2 col-span-4 justify-self-center items-center'>
@@ -28,15 +28,21 @@ export default function TodoItemExpanded({ expandedRef, todo, closeExpanded, des
                         ))}
                     </ul>
                 </div>
-                <div className='col-start-3 col-span-4'>
+                <div className='flex flex-row col-span-4 justify-center col-start-2'>
                     <Button
                     text="Close"
+                    bgColor={'black'}
+                    textColor={'white'}
+                    hoverColor={'bg-red-500'}
                     onClick={() => {
                         closeExpanded(todo.id);
                     }}
                     />
                     <Button 
                     text="Edit Task"
+                    bgColor={'black'}
+                    textColor={'white'}
+                    hoverColor={'bg-amber-500'}
                     onClick={() => {
                         editTodo(todo.id);
                     }}

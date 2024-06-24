@@ -10,7 +10,7 @@ export default {
         'hero-pattern': "url('./src/Assets/night-japan-background.jpeg')"
       },
       fontFamily: {
-        teko: ['"Teko"', 'sans-serif']
+        lato: ['"Lato"', 'sans-serif']
       }
     },
   },

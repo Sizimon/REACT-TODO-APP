@@ -31,13 +31,16 @@ export default function Dialog({ todo, description, setDescription, categories, 
                                 setEditingTitle(false)
                                 }
                             }
-                            text="Done" />
+                            text="Done"
+                            bgColor={'black'}
+                            textColor={'white'}
+                            hoverColor={'bg-amber-500'}/>
                     </div>
                 ) : (
                     <div className="flex flex-row justify-center items-center gap-2">
                         <h1 className="uppercase text-2xl">{todo.task}</h1>
                         <FaPencil
-                            className="text-zinc-400 cursor-pointer hover:text-white transition ease-in-out delay-50 duration-300"
+                            className="text-zinc-400 cursor-pointer hover:text-amber-500 transition ease-in-out delay-50 duration-300"
                             onClick={() => setEditingTitle(true)} />
                     </div>
                 )}
@@ -64,7 +67,12 @@ export default function Dialog({ todo, description, setDescription, categories, 
                         onChange={setColor}
                         hideInput={["rgb", "hsv"]}
                     />
-                    <Button text="Add Category" type="submit" />
+                    <Button
+                    text="Add Category"
+                    type="submit"
+                    bgColor={'black'}
+                    textColor={'white'}
+                    hoverColor={'bg-amber-500'}  />
                 </form>
             </div>
             <div className="col-span-5 md:col-span-3 text-center content-start">
@@ -94,7 +102,10 @@ export default function Dialog({ todo, description, setDescription, categories, 
                     <Button onClick={() => {
                         closeDialog(todo.id);
                         editDescription(todo.id, description, categories);
-                    }} text="Save & Close" />
+                    }} text="Save & Close"
+                    bgColor={'black'}
+                    textColor={'white'}
+                    hoverColor={'bg-amber-500'}  />
                 </div>
             </div>
         </dialog>
