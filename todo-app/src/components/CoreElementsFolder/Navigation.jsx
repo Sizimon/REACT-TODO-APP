@@ -37,13 +37,10 @@ export default function Navigation({ createTodo }) {
                         type="date"
                         onChange={(e) => setSelectedDate(e.target.value)}
                         value={selectedDate}
-                        className='bg-zinc-700 text-white rounded-lg p-1 focus:outline-none dark:[color-scheme:dark] font-lato' />
+                        className='bg-zinc-700 text-white rounded-lg p-1 focus:outline-none dark:[color-scheme:dark] font-lato cursor-pointer' />
                     <Button
                         onClick={handleTodo}
                         text={'Create'}
-                        bgColor={'black'}
-                        textColor={'white'}
-                        hoverColor={'bg-amber-500'}
                     />
                 </div>
             </div>

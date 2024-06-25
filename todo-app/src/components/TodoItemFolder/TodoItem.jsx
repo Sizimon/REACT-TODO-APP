@@ -229,7 +229,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                     </>
                 )}
                 {options && (
-                        <ul className="absolute top-[30%] left-[90%] text-center bg-zinc-800 border border-amber-500 text-amber-500 w-[100px]">
+                        <ul className="absolute top-[30%] left-[90%] text-center bg-zinc-800 border z-20 border-amber-500 text-amber-500 w-[100px]">
                             <li 
                             onClick={() => changePriority(todo.id)}
                             className="text-xs cursor-pointer hover:bg-amber-500 hover:text-white w-full p-1">

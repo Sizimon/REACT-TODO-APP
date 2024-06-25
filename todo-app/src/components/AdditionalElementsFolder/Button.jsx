@@ -1,9 +1,9 @@
 import React from 'react'
 
-function Button({ onClick, text, hoverColor, bgColor, textColor }) {
+function Button({ onClick, text }) {
     return (
         <button
-            className={`bg-${bgColor} hover:${hoverColor} text-${textColor} font-lato px-2 py-1 m-1 rounded-lg uppercase`}
+            className={`bg-black hover:bg-amber-500 text-white font-lato px-2 py-1 m-1 rounded-lg uppercase transition ease-in-out duration-300`}
             onClick={onClick}
         >{text}</button>
     )

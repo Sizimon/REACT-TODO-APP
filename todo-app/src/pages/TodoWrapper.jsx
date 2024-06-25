@@ -10,7 +10,7 @@ export default function TodoWrapper() {
     const [todos, setTodos] = useState([])
 
     function createTodo(todo, date) {
-        if (!todo && !date) return alert('Please enter a task / due date.')
+        if (!todo || !date) return alert('Please enter a task / due date.')
         else {
             setTodos([...todos, 
                 {id: uuidv4(),

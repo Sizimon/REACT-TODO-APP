@@ -29,20 +29,14 @@ export default function TodoItemExpanded({ expandedRef, todo, closeExpanded, des
                     </ul>
                 </div>
                 <div className='flex flex-row col-span-4 justify-center col-start-2'>
-                    <Button
-                    text="Close"
-                    bgColor={'black'}
-                    textColor={'white'}
-                    hoverColor={'bg-red-500'}
+                    <button
+                    className='bg-black hover:bg-red-500 text-white font-lato px-2 py-1 m-1 rounded-lg uppercase transition ease-in-out duration-300'
                     onClick={() => {
                         closeExpanded(todo.id);
                     }}
-                    />
+                    >Close</button>
                     <Button 
                     text="Edit Task"
-                    bgColor={'black'}
-                    textColor={'white'}
-                    hoverColor={'bg-amber-500'}
                     onClick={() => {
                         editTodo(todo.id);
                     }}

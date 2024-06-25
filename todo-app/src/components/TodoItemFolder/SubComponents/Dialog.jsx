@@ -32,9 +32,7 @@ export default function Dialog({ todo, description, setDescription, categories, 
                                 }
                             }
                             text="Done"
-                            bgColor={'black'}
-                            textColor={'white'}
-                            hoverColor={'bg-amber-500'}/>
+                        />
                     </div>
                 ) : (
                     <div className="flex flex-row justify-center items-center gap-2">
@@ -70,9 +68,7 @@ export default function Dialog({ todo, description, setDescription, categories, 
                     <Button
                     text="Add Category"
                     type="submit"
-                    bgColor={'black'}
-                    textColor={'white'}
-                    hoverColor={'bg-amber-500'}  />
+                    />
                 </form>
             </div>
             <div className="col-span-5 md:col-span-3 text-center content-start">
@@ -99,13 +95,13 @@ export default function Dialog({ todo, description, setDescription, categories, 
                     </ul>
                 </div>
                 <div className="flex flex-row justify-center gap-36 m-auto">
-                    <Button onClick={() => {
+                    <Button 
+                    onClick={() => {
                         closeDialog(todo.id);
                         editDescription(todo.id, description, categories);
-                    }} text="Save & Close"
-                    bgColor={'black'}
-                    textColor={'white'}
-                    hoverColor={'bg-amber-500'}  />
+                    }} 
+                    text="Save & Close" 
+                    />
                 </div>
             </div>
         </dialog>
