@@ -23,21 +23,23 @@ export default function Navigation({ createTodo }) {
                 </div>
             </div>
             <div>
-                <div>
-                    <input
-                        required
-                        type="text"
-                        onChange={e => setTodo(e.target.value)}
-                        value={todo}
-                        placeholder="Name your task!"
-                        className="rounded-md px-2 py-1 mx-2 bg-zinc-700 text-white outline-none font-lato"
-                    />
-                    <input
-                        required
-                        type="date"
-                        onChange={(e) => setSelectedDate(e.target.value)}
-                        value={selectedDate}
-                        className='bg-zinc-700 text-white rounded-lg p-1 focus:outline-none dark:[color-scheme:dark] font-lato cursor-pointer' />
+                <div className='flex flex-col'>
+                    <div className='flex flex-row'>
+                        <input
+                            required
+                            type="text"
+                            onChange={e => setTodo(e.target.value)}
+                            value={todo}
+                            placeholder="Name your task!"
+                            className="rounded-md px-2 py-1 mx-2 bg-zinc-700 text-white outline-none font-lato"
+                        />
+                        <input
+                            required
+                            type="date"
+                            onChange={(e) => setSelectedDate(e.target.value)}
+                            value={selectedDate}
+                            className='bg-zinc-700 text-white rounded-lg p-1 focus:outline-none dark:[color-scheme:dark] font-lato cursor-pointer' />
+                    </div>
                     <Button
                         onClick={handleTodo}
                         text={'Create'}

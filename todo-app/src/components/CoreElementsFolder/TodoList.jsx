@@ -139,13 +139,13 @@ export default function TodoList({ todos, setTodos }) {
                     <FaChevronRight />
                 </button>
             </div>
-            <div className="flex overflow-x-scroll h-full justify-start flex-grow items-start pb-10">
+            <div className="flex flex-col md:flex-row overflow-x-scroll h-full justify-start flex-grow items-start pb-10">
                 {weekDates.map((date, index) => (
                     <div
                     onDragOver={handleDragOver}
                     onDrop={(e) => handleDrop(e, date)}
                     key={index} 
-                    className="flex flex-col justify-start items-center text-white min-w-[20%] min-h-[600px] flex-grow border-r border-white">
+                    className="flex flex-col justify-start items-center text-white min-w-[100%] md:min-w-[20%] md:min-h-[600px] flex-grow border-r border-white">
                         <h2 className="uppercase py-4 border-b border-zinc-400 font-lato">{date.toDateString()}</h2>
                         {todos.filter(todo => new Date(todo.date).toDateString() === date.toDateString()).map(todos => (
                             <TodoItem 
