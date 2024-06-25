@@ -1,8 +1,7 @@
 import React, {useState} from "react";
 import { motion, MotionConfig } from "framer-motion";
 
-function MenuButton(){
-    const [active, setActive] = useState(false)
+function MenuButton({options, setOptions, active, setActive}){
 
     return (
         <MotionConfig
@@ -12,13 +11,16 @@ function MenuButton(){
         }}
         >
             <motion.button 
-                className="relative w-10 h-10"
-                onClick={() => setActive(!active)}
+                className="relative w-8 h-8"
+                onClick={() => {
+                    setActive(!active);
+                    setOptions(!options);
+                }}
                 animate={active ? "open" : "closed"}
                 initial={false}
             >
                 <motion.span
-                className="absolute h-[2px] w-6 bg-white"
+                className="absolute h-[1px] w-4 bg-white"
                 style={{
                     left: "50%",
                     top: "35%",
@@ -38,7 +40,7 @@ function MenuButton(){
                 }}
                 />
                 <motion.span
-                className="absolute h-[2px] w-6 bg-amber-500"
+                className="absolute h-[1px] w-4 bg-amber-500"
                 style={{
                     left: "50%",
                     top: "50%",
@@ -56,7 +58,7 @@ function MenuButton(){
                 }}
                 />
                 <motion.span
-                className="absolute h-[2px] w-6 bg-white"
+                className="absolute h-[1px] w-4 bg-white"
                 style={{
                     left: "50%",
                     bottom: "35%",

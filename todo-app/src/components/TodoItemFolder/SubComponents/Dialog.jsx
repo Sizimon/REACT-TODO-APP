@@ -15,7 +15,7 @@ export default function Dialog({ todo, description, setDescription, categories, 
     return (
         <dialog
             ref={dialogRef}
-            className="grid grid-cols-5 w-full md:w-10/12 lg:w-6/12 p-4 gap-4 rounded-lg border border-zinc-400 bg-zinc-800 text-white">
+            className="grid grid-cols-5 w-full md:w-10/12 lg:w-6/12 p-4 gap-4 rounded-lg border border-amber-500 bg-zinc-800 text-white">
             <div className="col-span-5 text-center">
                 {editingTitle ? (
                     <div className="flex flex-row justify-center items-center gap-2">
@@ -82,7 +82,7 @@ export default function Dialog({ todo, description, setDescription, categories, 
                     placeholder="Describe your task."
                     onChange={e => setDescription(e.target.value)}
                     rows="12"
-                    className="bg-zinc-700 border rounded-lg p-2 text-white resize-none border-none w-full"
+                    className="bg-zinc-700 border rounded-lg p-2 text-white resize-none border-none focus:outline-none w-full"
                 />
                 <div className="flex flex-col justify-center my-2">
                     <ul className="flex flex-row list-none p-auto justify-center">

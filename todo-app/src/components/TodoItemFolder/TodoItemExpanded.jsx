@@ -8,15 +8,15 @@ export default function TodoItemExpanded({ expandedRef, todo, closeExpanded, des
         <>
         <dialog
             ref={expandedRef}
-            className="grid grid-cols-6 w-full md:w-10/12 lg:w-6/12 p-4 gap-4 rounded-lg border border-zinc-400 bg-zinc-800 text-white">
+            className="grid grid-cols-6 w-full md:w-10/12 lg:w-6/12 p-4 gap-4 rounded-lg border border-amber-500 bg-zinc-800 text-white">
                 <div className='justify-self-center col-span-6'>
                     <h1 className='uppercase text-2xl pb-4 items-center'>{todo.task}</h1>
                 </div>
-                <div className='border border-amber-500 p-2 m-2 rounded-lg col-span-6 w-full justify-self-center'>
+                <div className='p-2 m-2 rounded-lg col-span-6 w-full justify-self-center bg-zinc-700'>
                     <p className='text-left rounded-md whitespace-pre-wrap break-words text-white text-md'>{todo.description}</p>
                 </div>
                 <div className='flex flex-row p-2 rounded-lg m-2 col-start-2 col-span-4 justify-self-center items-center'>
-                    <p>Categories:</p>
+                    <p>Categories: {todo.categories.length === 0 && "NO CATEGORIES ADDED"}</p>
                     <ul className='flex flex-row'>
                         {todo.categories && todo.categories.map((category, index) => (
                             <li 

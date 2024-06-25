@@ -4,18 +4,27 @@ import { FaChevronRight, FaCircleCheck } from "react-icons/fa6";
 import Lottie from "lottie-react";
 import Animations from "../../Animations";
 import Button from "../AdditionalElementsFolder/Button";
+
+import MenuButton from "../AdditionalElementsFolder/MenuButton"
 import Dialog from "./SubComponents/Dialog";
 import TodoContent from "./SubComponents/TodoContent";
 import TodoItemExpanded from "./TodoItemExpanded";
 
 export default function TodoItem({ todo, editTodo, editingItemId, editDescription, editTitle, deleteTodo, changePriority, changeOverdue, markComplete, expandTodo, expandedItemId }) {
+
     // SHORTEN DESCRIPTION FUNCTION
+
     const shortenDescription = (description, maxLength = 100) => {
         if (description.length > maxLength) {
             return `${description.substring(0, maxLength)}...`;
         }
         return description;
     }
+
+    // OPTIONS MENU 
+
+    const [options, setOptions] = useState(false);
+    const [active, setActive] = useState(false)
 
     // LIFTED DIALOG STATES
 
@@ -99,10 +108,19 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
         }
     }, [todo.isExpanded, todo.id, expandedItemId]);
 
+    // DRAGGABLE FUNCTIONALITY
+
+    const handleDragStart = (e) => {
+        e.dataTransfer.setData("todoId", todo.id);
+    }
+
     return (
         <>
             {/* THIS IS THE TODO ITEM START */}
-            <div className={`relative bg-zinc-700 border-box w-[90%] rounded-lg flex flex-col justify-center items-center overflow-auto border ${todo.priority ? "border-amber-500" : "border-zinc-400"} border-spacing-2 m-1 p-1 transition ease-in-out delay-50 ${todo.priority ? "shadow-amber-500" : "shadow-indigo-700"} hover:shadow-xl duration-500`}>
+            <div 
+            draggable
+            onDragStart={handleDragStart}
+            className={`relative bg-zinc-700 border-box w-[90%] rounded-lg flex flex-col justify-center items-center overflow-visible border ${todo.priority ? "border-amber-500" : "border-zinc-400"} border-spacing-2 m-1 p-1 transition ease-in-out delay-50 ${todo.priority ? "shadow-amber-500" : "shadow-indigo-700"} hover:shadow-xl duration-500`}>
                 {/* THIS IS THE OVERLAY IF AN ITEM IS MARKED AS COMPLETED */}
                 {todo.completed && (
                     <div className="absolute inset-0 z-[5] flex flex-col justify-center items-center bg-amber-500 opacity-95">
@@ -121,7 +139,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                     </div>
                 )}
                 {/* END */}
-                <div className="flex flex-row justify-between w-full">
+                <div className="flex flex-row justify-between w-full items-center">
                     {/* THESE ARE THE BUTTONS FOR DELETING OR MARKING PRIORITY */}
                     {/* <div className="flex flex-row items-center gap-1">
                         <FaTrash
@@ -132,10 +150,18 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                     </div> */}
                     <h1 className="uppercase font-lato text-base text-amber-500">{todo.task}</h1>
                     <div className="flex flex-row items-center gap-1">
-                        <FaThumbtack
+                        {todo.description && (
+                            <MenuButton 
+                            options={options}
+                            setOptions={setOptions}
+                            active={active}
+                            setActive={setActive}
+                            /> 
+                        )}
+                        {/* <FaThumbtack
                             onClick={() => changePriority(todo.id)}
                             className="text-amber-500 hover:text-amber-600 cursor-pointer text-sm transform hover:scale-110 transition ease-in-out duration-100"
-                        />
+                        /> */}
                     </div>
                     {/* END */}
                 </div>
@@ -175,7 +201,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                                 }
                             </ul>
                         </div>
-                        <div className="flex flex-row gap-12">
+                        {/* <div className="flex flex-row gap-12">
                             <FaTrash
                                 onClick={() => deleteTodo(todo.id)}
                                 className="text-red-500 hover:text-red-600 text-lg cursor-pointer transform hover:scale-110 transition ease-in-out duration-100" />
@@ -183,7 +209,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                                 onClick={() => markComplete(todo.id)}
                                 className="text-green-500 hover:text-green-600 text-lg cursor-pointer transform hover:scale-110 transition ease-in-out duration-100"
                             />
-                        </div>
+                        </div> */}
                         {/* END */}
                     </>
                 ) : (
@@ -202,6 +228,30 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
                         </div>
                     </>
                 )}
+                {options && (
+                        <ul className="absolute top-[30%] left-[90%] text-center bg-zinc-800 border border-amber-500 text-amber-500 w-[100px]">
+                            <li 
+                            onClick={() => changePriority(todo.id)}
+                            className="text-xs cursor-pointer hover:bg-amber-500 hover:text-white w-full p-1">
+                                Mark Priority
+                            </li>
+                            <li 
+                            onClick={() => {
+                                setOptions(!options);
+                                setActive(!active);
+                                markComplete(todo.id);
+                            }}
+                            className="text-xs cursor-pointer hover:bg-amber-500 hover:text-white w-full p-1">
+                                Mark Complete
+                            </li>
+                            <li 
+                            onClick={() => deleteTodo(todo.id)}
+                            className="text-xs cursor-pointer hover:bg-amber-500 hover:text-white w-full p-1">
+                                Delete Task
+                            </li>
+                        </ul>
+                        )
+            }
             </div>
 
             {/* THIS IS THE TODO ITEM END */}
