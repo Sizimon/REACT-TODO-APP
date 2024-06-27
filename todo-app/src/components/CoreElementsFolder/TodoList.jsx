@@ -122,7 +122,7 @@ export default function TodoList({ todos, setTodos }) {
                     newDate.setDate(prevDate.getDate() - 7);
                     return newDate;
                 })}
-                className="text-white uppercase flex flex-row items-center gap-1 transition ease-in-out duration-300 hover:text-amber-500 font-lato"
+                className="text-white uppercase flex flex-row items-center gap-1 transition ease-in-out duration-300 hover:text-amber-500 font-lato p-2"
                 >
                     <FaChevronLeft />
                     Previous Week
@@ -133,7 +133,7 @@ export default function TodoList({ todos, setTodos }) {
                     newDate.setDate(prevDate.getDate() + 7);
                     return newDate;
                 })}
-                className="text-white uppercase flex flex-row items-center gap-1 transition ease-in-out duration-300 hover:text-amber-500 font-lato"
+                className="text-white uppercase flex flex-row items-center gap-1 transition ease-in-out duration-300 hover:text-amber-500 font-lato p-2"
                 >
                     Next Week
                     <FaChevronRight />
