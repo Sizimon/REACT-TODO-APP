@@ -4,11 +4,14 @@ import { FaChevronRight, FaCircleCheck } from "react-icons/fa6";
 import Lottie from "lottie-react";
 import Animations from "../../Animations";
 import Button from "../AdditionalElementsFolder/Button";
+import { v4 as uuidv4 } from 'uuid'
 
 import MenuButton from "../AdditionalElementsFolder/MenuButton"
 import Dialog from "./SubComponents/Dialog";
 import TodoContent from "./SubComponents/TodoContent";
 import TodoItemExpanded from "./TodoItemExpanded";
+
+uuidv4();
 
 export default function TodoItem({ todo, editTodo, editingItemId, editDescription, editTitle, deleteTodo, changePriority, changeOverdue, markComplete, expandTodo, expandedItemId }) {
 
@@ -68,7 +71,7 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
 
     const submitCategory = (categoryName, color) => {
         if (categories.length < 5 && categoryName.length > 0) {
-            setCategories(prevCategories => [...prevCategories, { name: categoryName, color: color }]);
+            setCategories(prevCategories => [...prevCategories, { id: uuidv4(), name: categoryName, color: color }]);
             setCategoryName('');
         } else if (categoryName === '') {
             alert('Your category must have a name.')
@@ -113,6 +116,8 @@ export default function TodoItem({ todo, editTodo, editingItemId, editDescriptio
     const handleDragStart = (e) => {
         e.dataTransfer.setData("todoId", todo.id);
     }
+
+    console.log(todo.categories)
 
     return (
         <>
